@@ -10,7 +10,7 @@ normalsd = sqrt(1/12)
 
 #  Parameter for the number of MC runs for each estimation (fixed)
 # The k-values for input
-ExpPropOfDeaths = 0.5;
+ExpPropOfDeaths = .75;
 NumberOfBootstraps = 200;
 mydesign = "strategy"
 k1 = 0.25; k2 = 0.75;
