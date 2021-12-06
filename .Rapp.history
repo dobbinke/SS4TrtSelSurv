@@ -1,0 +1,6315 @@
+tmp[5]
+tmp$estimates$ER.mkrbased.emp
+TrueTheta0 = 0.25;#
+TrueTheta1 = 0.25;#
+#
+DRMSETheta0 = (DRapproachTheta0 - TrueTheta0)^2#
+DRMSETheta1 = (DRapproachTheta1 - TrueTheta1)^2#
+#
+JanesTheta0 = tmp$estimates$ER.mkrbased.emp#
+JanesMSETheta0 = mean(JanesTheta0 - TrueTheta0)^2 # not sure if this is theta0 or theta1 MSE
+myx = (1:1000)/100
+myx = (1:1000)/1001
+plot(dbeta(myx,1,1))
+plot(dbeta(myx,2,2))
+plot(dbeta(myx,3,3))
+plot(dbeta(myx,5,5))
+plot(dbeta(myx,50,50))
+plot(dbeta(myx,1/50,1/50))
+plot(dbeta(myx,5,5))
+lines(dbeta(myx,1/5,1/5))
+myfun1 = function(x) 4*x*(x<0.5) + (4-4*x)(x>0.5)
+plot(myfun1(myx))
+myfun1 = function(x) 4*x*which(x<0.5) + (4-4*x)which(x>0.5)
+myfun1 = function(x) 4*x*which(x<0.5) + (4-4*x)*which(x>0.5)
+plot(myfun1(myx))
+summary(myx)
+myfun1 = function(x) 4*x*(x<0.5) + (4-4*x)*(x>0.5)
+plot(myfun1(myx))
+myfun2 = function(x) (4-4x) *(x<0.5) + 4*x*(x>0.5)
+myfun2 = function(x) (4-4*x) *(x<0.5) + 4*x*(x>0.5)
+lines(myfun2(myx))
+myfun1
+myfun2
+myfun2 = function(x) (2-4*x)*(x<0.5) + (4*x-2) * (x>0.5)
+lines(myfun2(myx))
+myfun1 = function(x) dgamma(x,4.3,6.2)/dgamma(x,4,7)
+max(myfun1,0,inf)
+max(myfun1,0,infty)
+optimize(myfun1,0,inf)
+optimize(myfun1,min=0,max=inf)
+help(optimize)
+inf
+infty
+optimize(myfun1,min=0,max=1000)
+optimize(myfun1,interval=c(0,inf))
+optimize(myfun1,interval=c(0,1000))
+optimize(myfun1,interval=c(0,1000),maximum=TRUE)
+ls()
+myfun1 = function(x) dgamma(x,4.3,6.2)/dgamma(x,4,7)
+plot(myfun,lower=0,upper=10)
+plot(myfun1,lower=0,upper=10)
+plot(myfun1,lower=0,upper=100)
+myfun1
+plot(myfun1,lower=0,upper=100)
+plot(myfun1,lower=0,upper=10)
+rm(ls())
+rm(list=ls())
+ls()
+myfun = function(x)  dgamma(x,4,7)/dgamma(x,4.3,6.2)
+myfun((1:100)/100)
+myfun((0:100)/100)
+optimize(myfun,interval=c(0.1,1))
+optimize(myfun,interval=c(0.1,1),maximum=TRUE)
+optimize(myfun,interval=c(0.001,1),maximum=TRUE)
+optimize(myfun,interval=c(0.000001,1),maximum=TRUE)
+myfun2 = function(x) 1/myfun(x)
+myfun2((0:100)/100)
+myfun2((1:100)/100)
+myfun2((1:100)/10)
+myfun2((1:100))
+myfun = function( exp(x^(-.5)))
+myfun = function(x) exp(x^(-.5)))
+myfun = function(x) exp(x^(-.5))
+plot(myfun,from=0,to=10)
+optimize(myfun,interval=c(0,10),maximize=TRUE)
+optimize(myfun,interval=c(0,10),maximize=true)
+help(optimize)
+optimize(myfun,interval=c(0,10),maximum=true)
+optimize(myfun,interval=c(0,10),maximum=TRUE)
+myx = (0:1000)/100
+plot(myx,myfun(myx))
+log(-2)
+log(.5)
+log(1.5)
+help(runif)
+mcruns = 5000;#
+myds=c(0.1,0.25,0.4);#
+myxchains = matrix(rep(NA,3*mcruns),ncol=mcruns)#
+#
+for (j in 1:3)#
+  myd=myds[j]#
+#
+uchain = rep(NA,mcruns)#
+xchain = rep(NA,mcruns)#
+xchain[1]  = 0.5;  # from a uniform distribution#
+#
+for (i in 2:mcruns) {#
+	uchain[i-1] = runif(1,min=0,max=exp(-xchain[i-1]^myd));#
+	xchain[i] = runif(1,min=0,max=(-log(uchain[i-1]))^(1/myd)) #
+}#
+#
+par(mfrow=c(1,3))#
+plot(myxchains[1,],main="d is 0.1")#
+plot(myxchains[2,],main="d is 0.25")#
+plot(myxchains[3,],main="d is 0.4")
+mcruns = 5000;#
+myds=c(0.1,0.25,0.4);#
+myxchains = matrix(rep(NA,3*mcruns),ncol=mcruns)#
+#
+for (j in 1:3) {#
+  	myd=myds[j]#
+#
+	uchain = rep(NA,mcruns)#
+	xchain = rep(NA,mcruns)#
+	xchain[1]  = 0.5;  # from a uniform distribution#
+#
+	for (i in 2:mcruns) {#
+		uchain[i-1] = runif(1,min=0,max=exp(-xchain[i-1]^myd));#
+		xchain[j] = runif(1,min=0,max=(-log(uchain[i-1]))^(1/myd)) #
+	}#
+	xchains[j,] = xchain;#
+}#
+#
+par(mfrow=c(1,3))#
+plot(myxchains[1,],main="d is 0.1")#
+plot(myxchains[2,],main="d is 0.25")#
+plot(myxchains[3,],main="d is 0.4")
+mcruns = 5000;#
+myds=c(0.1,0.25,0.4);#
+myxchains = matrix(rep(NA,3*mcruns),ncol=mcruns)#
+#
+for (j in 1:3) {#
+  	myd=myds[j]#
+#
+	uchain = rep(NA,mcruns)#
+	xchain = rep(NA,mcruns)#
+	xchain[1]  = 0.5;  # from a uniform distribution#
+#
+	for (i in 2:mcruns) {#
+		uchain[i-1] = runif(1,min=0,max=exp(-xchain[i-1]^myd));#
+		xchain[j] = runif(1,min=0,max=(-log(uchain[i-1]))^(1/myd)) #
+	}#
+	myxchains[j,] = xchain;#
+}#
+#
+par(mfrow=c(1,3))#
+plot(myxchains[1,],main="d is 0.1")#
+plot(myxchains[2,],main="d is 0.25")#
+plot(myxchains[3,],main="d is 0.4")
+warnings()
+mcruns = 5000;#
+myds=c(0.1,0.25,0.4);#
+myxchains = matrix(rep(NA,3*mcruns),ncol=mcruns)#
+#
+for (j in 1:3) {#
+  	myd=myds[j]#
+#
+	thisuchain = rep(NA,mcruns)#
+#
+	myxchains[,1]  = rep(0.5,3);  # from a uniform distribution#
+#
+	for (i in 2:mcruns) {#
+		uchain[i-1] = runif(1,min=0,max=exp(-myxchains[j,i-1]^myd));#
+		myxchains[j,i] = runif(1,min=0,max=(-log(uchain[i-1]))^(1/myd)) #
+	}#
+}
+par(mfrow=c(1,3))#
+plot(myxchains[1,],main="d is 0.1")#
+plot(myxchains[2,],main="d is 0.25")#
+plot(myxchains[3,],main="d is 0.4")
+mean(myxchains[1,])
+mean(myxchains[2,])
+mean(myxchains[3,])
+mcruns = 50000;#
+myds=c(0.9,0.95,0.99);#
+#
+mydenoms = c(1.05218,1.02341,1.00431)#
+#
+myxchains = matrix(rep(NA,3*mcruns),ncol=mcruns)#
+#
+for (j in 1:3) {#
+  	myd=myds[j]#
+#
+  	thisfofx = function(x)  {#
+  	  exp(-x^(myds[j]))/mydenoms[j]#
+  	}#
+#
+	thisuchain = rep(NA,mcruns)#
+#
+	myxchains[,1]  = rep(0.5,3);  # from a uniform distribution#
+#
+	for (i in 2:mcruns) {#
+		thisuchain[i-1] = runif(1,min=0,max=thisfofx(myxchains[j,i-1]));#
+		myxchains[j,i] = runif(1,min=0,max=(-log(thisuchain[i-1]))^(1/myd)) #
+	}#
+}#
+#
+par(mfrow=c(1,3))#
+# plot(myxchains[1,],main="d is 0.1")#
+# plot(myxchains[2,],main="d is 0.25")#
+# plot(myxchains[3,],main="d is 0.4")#
+mymean1 = cumsum(myxchains[1,])/(1:mcruns)#
+mymean2 = cumsum(myxchains[2,])/(1:mcruns)#
+mymean3 = cumsum(myxchains[3,])/(1:mcruns)#
+#
+plot(mymean1,main="d is 0.1")#
+plot(mymean2,main="d is 0.25")#
+plot(mymean3,main="d is 0.4")#
+#
+mymean1[mcruns]#
+mymean2[mcruns]#
+mymean3[mcruns]
+myfun = function(x) x*exp(-x*1)
+integrate(myfun,min=0,max=inf)
+help(integrate)
+integrate(myfun,lower=0,upper=inf)
+integrate(myfun,lower=0,upper=infty)
+integrate(myfun,lower=0,upper=Inf)
+myfun
+myfun = function(x) x*exp(-x*2)
+integrate(myfun,lower=0,upper=Inf)
+myfun = function(x) x*exp(-x*.1)
+integrate(myfun,lower=0,upper=Inf)
+integrate(myfun,lower=0,upper=2)
+integrate(myfun,lower=0,upper=Inf)
+myfun = function(x) x*exp(-x*.1)
+integrate(myfun,lower=0,upper=2)
+myfun = function(x) x*exp(-x*2)
+integrate(myfun,lower=0,upper=2)
+gcvshape = function(x) (2*x*(x<0.5))+((2-2*x)*(x>0.5))
+myxs = (0:100)/100
+plot(myxs,gcvshape(myxs))
+gtvshape = function(x) (1-(2*x*(x<0.5))) + ((x>=0.5)*(2*x-1))
+gcvshape = function(x) (2*x*(x<0.5))+((2-2*x)*(x>=0.5))
+plot(myxs,gcvshape(myxs))
+lines(myxs,gtvshape(myxs))
+gcvshape = function(x) (2*x*(x<0.5))+((2*x-1)*(x>=0.5))
+gcvshape = function(x) (2*x*(x<0.5))+((2-2*x)*(x>=0.5))
+gtvshape = function(x) (1-2*x)*(x<0.5) + ((x>=0.5)*(2*x-1))
+plot(myxs,gcvshape(myxs))
+lines(myxs,gtvshape(myxs))
+myn = 400#
+#
+myus = runif(myn);#
+#
+true_pi_c = 0.5;#
+true_pi_t = 0.5;#
+#
+groupControl = 1:(myn/2)#
+groupControlM1indices = rbinom(myn/2,1,true_pi_c);#
+groupControlM0indices = setdiff(groupControl,which(groupControlM1indices==1))
+groupControl
+groupControlM1indices
+groupcontrolM0indices
+groupControlM0indices
+myn = 400#
+#
+myus = runif(myn);#
+#
+true_pi_c = 0.5;#
+true_pi_t = 0.5;#
+#
+groupControl = 1:(myn/2)#
+groupControlM1indices = rbinom(myn/2,1,true_pi_c);#
+groupControlM1 = which(groupControlM1indices==1);#
+groupControlM0 = setdiff(groupControl,groupControlM1)
+groupControl
+groupControlM1
+groupControlM0
+groupTreatment = (1+(myn/2)):myn;#
+groupTreatmentM1indices = rbinom(myn/2,1,true_pi_t);#
+groupTreatmentM1 = (myn/2)+which(groupTreatmentM1indices==1);#
+groupTreatmentM0 = setdiff(groupTreatment,groupTreatmentM1);
+groupTreatmentM1
+groupTreatmentM0
+# SIMULATE DATA FROM THE MODEL#
+#
+myn = 400;#
+#
+mycuts = c(0, 0.5, 1)#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+for (i in 1:(myn/4)) {#
+	thisCM1multinom = mycM1grps[,i];#
+	myxcM1s[i] = t(thisCM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM1multinom = mytM1grps[,i];#
+	myxtM1s[i] = t(thisTM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisCM0multinom = mycM0grps[,i];#
+	myxcM0s[i] = t(thisCM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM0multinom = mytM0grps[,i];#
+	myxtM0s[i] = t(thisTM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+}#
+summary(myxcM1s)#
+summary(myxtM1s)#
+summary(myxcM0s)#
+summary(myxtM0s)#
+#
+myxcs = c(myxcM0s,myxcM1s);#
+myxts = c(myxtM0s,myxtM1s);#
+mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+# DENSITY RATIO ESTIMATION#
+#
+hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+hat_pi_c#
+hat_pi_t#
+hat_gsubc = w_hat1 * hat_pi_c;#
+hat_gsubt = w_hat3 * hat_pi_t;#
+boxplot(myxcM0s,myxcM1s,myxtM1s,myxtM0s)#
+#
+# use all data to estimate the common marginal distribution#
+myxmarginal = c(myxcM0s,myxcM1s,myxtM1s,myxtM0s)#
+hist(myxmarginal)#
+#
+densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal)#
+densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal)#
+#
+new_x = seq(from=0,to=1,by = 0.01)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+par(mfrow=c(2,2))#
+#
+plot(new_x, w_hat1, pch=19, main="uLSIF")#
+abline(h=0.2)#
+abline(h=1.8)#
+#
+plot(new_x, w_hat3, pch=19, main="uLSIF")#
+abline(h=0.2)#
+abline(h=1.8)#
+# ESTIMATE THETA0 AND THETA1#
+#
+theta0vec = rep(NA,length(w_hat1));#
+theta1vec = rep(NA,length(w_hat1));#
+#
+for (i in 1:length(w_hat1)) {#
+	thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+	theta0vec[i] = thismax - hat_gsubc[i];#
+	theta1vec[i] = thismax - hat_gsubt[i];#
+}#
+#
+DRapproachTheta0 = mean(theta0vec)#
+#
+DRapproachTheta1 = mean(theta1vec)#
+#
+DRapproachTheta0#
+#
+DRapproachTheta1
+# install.packages("densratio")#
+library(densratio)#
+densratio_obj1 = densratio(rep(myxControlMis1,4),myxmarginal)#
+densratio_obj3 = densratio(rep(myxTreatmentMis1,4),myxmarginal)#
+#
+new_x = seq(from=0,to=1,by = 0.01)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+par(mfrow=c(2,2))#
+#
+plot(new_x, w_hat1, pch=19, main="uLSIF")abline(0,2)#
+#
+plot(new_x, w_hat3, pch=19, main="uLSIF")#
+#
+densratio_obj1#
+#
+summary(densratio_obj1)
+# SIMULATE DATA FROM THE MODEL#
+#
+myn = 400;#
+#
+mycuts = c(0, 0.5, 1)#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+for (i in 1:(myn/4)) {#
+	thisCM1multinom = mycM1grps[,i];#
+	myxcM1s[i] = t(thisCM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM1multinom = mytM1grps[,i];#
+	myxtM1s[i] = t(thisTM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisCM0multinom = mycM0grps[,i];#
+	myxcM0s[i] = t(thisCM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM0multinom = mytM0grps[,i];#
+	myxtM0s[i] = t(thisTM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+}#
+summary(myxcM1s)#
+summary(myxtM1s)#
+summary(myxcM0s)#
+summary(myxtM0s)#
+#
+myxcs = c(myxcM0s,myxcM1s);#
+myxts = c(myxtM0s,myxtM1s);#
+mymarginal = c(myxcs,myxts)#
+#
+mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+# DENSITY RATIO ESTIMATION#
+#
+# install.packages("densratio")#
+library(densratio)#
+densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal)#
+densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal)#
+#
+new_x = seq(from=0,to=1,by = 0.01)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+par(mfrow=c(2,2))#
+#
+plot(new_x, w_hat1, pch=19, main="uLSIF")abline(0,2)#
+#
+plot(new_x, w_hat3, pch=19, main="uLSIF")
+par(mfrow=c(1,2))#
+#
+plot(new_x, w_hat1, pch=19, main="uLSIF")#
+#
+plot(new_x, w_hat3, pch=19, main="uLSIF")
+# SIMULATE DATA FROM THE MODEL#
+#
+myn = 4000;#
+#
+mycuts = c(0, 0.5, 1)#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+for (i in 1:(myn/4)) {#
+	thisCM1multinom = mycM1grps[,i];#
+	myxcM1s[i] = t(thisCM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM1multinom = mytM1grps[,i];#
+	myxtM1s[i] = t(thisTM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisCM0multinom = mycM0grps[,i];#
+	myxcM0s[i] = t(thisCM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM0multinom = mytM0grps[,i];#
+	myxtM0s[i] = t(thisTM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+}#
+summary(myxcM1s)#
+summary(myxtM1s)#
+summary(myxcM0s)#
+summary(myxtM0s)#
+#
+myxcs = c(myxcM0s,myxcM1s);#
+myxts = c(myxtM0s,myxtM1s);#
+mymarginal = c(myxcs,myxts)#
+#
+mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+# DENSITY RATIO ESTIMATION#
+#
+# install.packages("densratio")#
+library(densratio)#
+densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal)#
+densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal)#
+#
+new_x = seq(from=0,to=1,by = 0.01)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+par(mfrow=c(1,2))#
+#
+plot(new_x, w_hat1, pch=19, main="uLSIF")#
+#
+plot(new_x, w_hat3, pch=19, main="uLSIF")
+help(densratio)
+# SIMULATE DATA FROM THE MODEL#
+#
+myn = 4000;#
+#
+mycuts = c(0, 0.5, 1)#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+for (i in 1:(myn/4)) {#
+	thisCM1multinom = mycM1grps[,i];#
+	myxcM1s[i] = t(thisCM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM1multinom = mytM1grps[,i];#
+	myxtM1s[i] = t(thisTM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisCM0multinom = mycM0grps[,i];#
+	myxcM0s[i] = t(thisCM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM0multinom = mytM0grps[,i];#
+	myxtM0s[i] = t(thisTM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+}#
+summary(myxcM1s)#
+summary(myxtM1s)#
+summary(myxcM0s)#
+summary(myxtM0s)#
+#
+myxcs = c(myxcM0s,myxcM1s);#
+myxts = c(myxtM0s,myxtM1s);#
+mymarginal = c(myxcs,myxts)#
+#
+mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+# DENSITY RATIO ESTIMATION#
+#
+# install.packages("densratio")#
+library(densratio)#
+densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal)#
+densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal)#
+#
+new_x = seq(from=0,to=1,by = 0.01)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+par(mfrow=c(1,2))#
+#
+plot(new_x, w_hat1, pch=19, main="RuLSIF")#
+#
+plot(new_x, w_hat3, pch=19, main="RuLSIF")#
+#
+densratio_obj1#
+#
+summary(densratio_obj1)#
+# hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+# hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+# hat_pi_c#
+# hat_pi_t#
+# hat_gsubc = w_hat1 * hat_pi_c;#
+# hat_gsubt = w_hat3 * hat_pi_t;#
+# boxplot(myxcM0s,myxcM1s,myxtM1s,myxtM0s)#
+#
+# # use all data to estimate the common marginal distribution#
+# myxmarginal = c(myxcM0s,myxcM1s,myxtM1s,myxtM0s)#
+# hist(myxmarginal)#
+#
+# densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal)#
+# densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal)#
+#
+# new_x = seq(from=0,to=1,by = 0.01)#
+#
+# w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+# w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+# par(mfrow=c(2,2))#
+#
+# plot(new_x, w_hat1, pch=19, main="uLSIF")#
+# abline(h=0.2)#
+# abline(h=1.8)#
+#
+# plot(new_x, w_hat3, pch=19, main="uLSIF")#
+# abline(h=0.2)#
+# abline(h=1.8)#
+# # ESTIMATE THETA0 AND THETA1#
+#
+# theta0vec = rep(NA,length(w_hat1));#
+# theta1vec = rep(NA,length(w_hat1));#
+#
+# for (i in 1:length(w_hat1)) {#
+# 	thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+# 	theta0vec[i] = thismax - hat_gsubc[i];#
+# 	theta1vec[i] = thismax - hat_gsubt[i];#
+# }#
+#
+# DRapproachTheta0 = mean(theta0vec)#
+#
+# DRapproachTheta1 = mean(theta1vec)#
+#
+# DRapproachTheta0#
+#
+# DRapproachTheta1
+# SIMULATE DATA FROM THE MODEL#
+#
+myn = 4000;#
+#
+mycuts = c(0, 0.5, 1)#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+for (i in 1:(myn/4)) {#
+	thisCM1multinom = mycM1grps[,i];#
+	myxcM1s[i] = t(thisCM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM1multinom = mytM1grps[,i];#
+	myxtM1s[i] = t(thisTM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisCM0multinom = mycM0grps[,i];#
+	myxcM0s[i] = t(thisCM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM0multinom = mytM0grps[,i];#
+	myxtM0s[i] = t(thisTM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+}#
+summary(myxcM1s)#
+summary(myxtM1s)#
+summary(myxcM0s)#
+summary(myxtM0s)#
+#
+myxcs = c(myxcM0s,myxcM1s);#
+myxts = c(myxtM0s,myxtM1s);#
+mymarginal = c(myxcs,myxts)#
+#
+mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+# DENSITY RATIO ESTIMATION#
+#
+# install.packages("densratio")#
+library(densratio)#
+densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal)#
+densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal)#
+#
+new_x = seq(from=0,to=1,by = 0.01)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+par(mfrow=c(1,2))#
+#
+plot(new_x, w_hat1, pch=19, main="KLIEP")#
+#
+plot(new_x, w_hat3, pch=19, main="KLIEP")#
+#
+densratio_obj1#
+#
+summary(densratio_obj1)#
+# hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+# hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+# hat_pi_c#
+# hat_pi_t#
+# hat_gsubc = w_hat1 * hat_pi_c;#
+# hat_gsubt = w_hat3 * hat_pi_t;#
+# boxplot(myxcM0s,myxcM1s,myxtM1s,myxtM0s)#
+#
+# # use all data to estimate the common marginal distribution#
+# myxmarginal = c(myxcM0s,myxcM1s,myxtM1s,myxtM0s)#
+# hist(myxmarginal)#
+#
+# densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal)#
+# densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal)#
+#
+# new_x = seq(from=0,to=1,by = 0.01)#
+#
+# w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+# w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+# par(mfrow=c(2,2))#
+#
+# plot(new_x, w_hat1, pch=19, main="uLSIF")#
+# abline(h=0.2)#
+# abline(h=1.8)#
+#
+# plot(new_x, w_hat3, pch=19, main="uLSIF")#
+# abline(h=0.2)#
+# abline(h=1.8)#
+# # ESTIMATE THETA0 AND THETA1#
+#
+# theta0vec = rep(NA,length(w_hat1));#
+# theta1vec = rep(NA,length(w_hat1));#
+#
+# for (i in 1:length(w_hat1)) {#
+# 	thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+# 	theta0vec[i] = thismax - hat_gsubc[i];#
+# 	theta1vec[i] = thismax - hat_gsubt[i];#
+# }#
+#
+# DRapproachTheta0 = mean(theta0vec)#
+#
+# DRapproachTheta1 = mean(theta1vec)#
+#
+# DRapproachTheta0#
+#
+# DRapproachTheta1
+# SIMULATE DATA FROM THE MODEL#
+#
+myn = 400;#
+#
+mycuts = c(0, 0.5, 1)#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+for (i in 1:(myn/4)) {#
+	thisCM1multinom = mycM1grps[,i];#
+	myxcM1s[i] = t(thisCM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM1multinom = mytM1grps[,i];#
+	myxtM1s[i] = t(thisTM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisCM0multinom = mycM0grps[,i];#
+	myxcM0s[i] = t(thisCM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM0multinom = mytM0grps[,i];#
+	myxtM0s[i] = t(thisTM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+}#
+summary(myxcM1s)#
+summary(myxtM1s)#
+summary(myxcM0s)#
+summary(myxtM0s)#
+#
+myxcs = c(myxcM0s,myxcM1s);#
+myxts = c(myxtM0s,myxtM1s);#
+mymarginal = c(myxcs,myxts)#
+#
+mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+# DENSITY RATIO ESTIMATION#
+#
+# install.packages("densratio")#
+library(densratio)#
+densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal)#
+densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal)#
+#
+new_x = seq(from=0,to=1,by = 0.01)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+par(mfrow=c(1,2))#
+#
+plot(new_x, w_hat1, pch=19, main="KLIEP")#
+#
+plot(new_x, w_hat3, pch=19, main="KLIEP")#
+#
+densratio_obj1#
+#
+summary(densratio_obj1)#
+# hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+# hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+# hat_pi_c#
+# hat_pi_t#
+# hat_gsubc = w_hat1 * hat_pi_c;#
+# hat_gsubt = w_hat3 * hat_pi_t;#
+# boxplot(myxcM0s,myxcM1s,myxtM1s,myxtM0s)#
+#
+# # use all data to estimate the common marginal distribution#
+# myxmarginal = c(myxcM0s,myxcM1s,myxtM1s,myxtM0s)#
+# hist(myxmarginal)#
+#
+# densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal)#
+# densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal)#
+#
+# new_x = seq(from=0,to=1,by = 0.01)#
+#
+# w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+# w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+# par(mfrow=c(2,2))#
+#
+# plot(new_x, w_hat1, pch=19, main="uLSIF")#
+# abline(h=0.2)#
+# abline(h=1.8)#
+#
+# plot(new_x, w_hat3, pch=19, main="uLSIF")#
+# abline(h=0.2)#
+# abline(h=1.8)#
+# # ESTIMATE THETA0 AND THETA1#
+#
+# theta0vec = rep(NA,length(w_hat1));#
+# theta1vec = rep(NA,length(w_hat1));#
+#
+# for (i in 1:length(w_hat1)) {#
+# 	thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+# 	theta0vec[i] = thismax - hat_gsubc[i];#
+# 	theta1vec[i] = thismax - hat_gsubt[i];#
+# }#
+#
+# DRapproachTheta0 = mean(theta0vec)#
+#
+# DRapproachTheta1 = mean(theta1vec)#
+#
+# DRapproachTheta0#
+#
+# DRapproachTheta1
+thistest <- "Hi"
+thistest
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "KLIEP"#
+#
+myn = 4000;#
+#
+mycuts = c(0, 0.5, 1)#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+for (i in 1:(myn/4)) {#
+	thisCM1multinom = mycM1grps[,i];#
+	myxcM1s[i] = t(thisCM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM1multinom = mytM1grps[,i];#
+	myxtM1s[i] = t(thisTM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisCM0multinom = mycM0grps[,i];#
+	myxcM0s[i] = t(thisCM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM0multinom = mytM0grps[,i];#
+	myxtM0s[i] = t(thisTM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+}#
+summary(myxcM1s)#
+summary(myxtM1s)#
+summary(myxcM0s)#
+summary(myxtM0s)#
+#
+myxcs = c(myxcM0s,myxcM1s);#
+myxts = c(myxtM0s,myxtM1s);#
+mymarginal = c(myxcs,myxts)#
+#
+mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+# DENSITY RATIO ESTIMATION#
+#
+# install.packages("densratio")#
+library(densratio)#
+densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+new_x = seq(from=0,to=1,by = 0.01)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+par(mfrow=c(1,2))#
+plot(new_x, w_hat1, pch=19, main=thismethod)#
+plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+densratio_obj1#
+#
+summary(densratio_obj1)#
+# hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+# hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+# hat_pi_c#
+# hat_pi_t#
+# hat_gsubc = w_hat1 * hat_pi_c;#
+# hat_gsubt = w_hat3 * hat_pi_t;#
+# boxplot(myxcM0s,myxcM1s,myxtM1s,myxtM0s)#
+#
+# # use all data to estimate the common marginal distribution#
+# myxmarginal = c(myxcM0s,myxcM1s,myxtM1s,myxtM0s)#
+# hist(myxmarginal)#
+#
+# densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal)#
+# densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal)#
+#
+# new_x = seq(from=0,to=1,by = 0.01)#
+#
+# w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+# w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+# par(mfrow=c(2,2))#
+#
+# plot(new_x, w_hat1, pch=19, main="uLSIF")#
+# abline(h=0.2)#
+# abline(h=1.8)#
+#
+# plot(new_x, w_hat3, pch=19, main="uLSIF")#
+# abline(h=0.2)#
+# abline(h=1.8)#
+# # ESTIMATE THETA0 AND THETA1#
+#
+# theta0vec = rep(NA,length(w_hat1));#
+# theta1vec = rep(NA,length(w_hat1));#
+#
+# for (i in 1:length(w_hat1)) {#
+# 	thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+# 	theta0vec[i] = thismax - hat_gsubc[i];#
+# 	theta1vec[i] = thismax - hat_gsubt[i];#
+# }#
+#
+# DRapproachTheta0 = mean(theta0vec)#
+#
+# DRapproachTheta1 = mean(theta1vec)#
+#
+# DRapproachTheta0#
+#
+# DRapproachTheta1
+length(new_x)
+length(w_hat1)
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "RuLSIF"#
+#
+myn = 4000;#
+#
+mycuts = c(0, 0.5, 1)#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+for (i in 1:(myn/4)) {#
+	thisCM1multinom = mycM1grps[,i];#
+	myxcM1s[i] = t(thisCM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM1multinom = mytM1grps[,i];#
+	myxtM1s[i] = t(thisTM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisCM0multinom = mycM0grps[,i];#
+	myxcM0s[i] = t(thisCM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM0multinom = mytM0grps[,i];#
+	myxtM0s[i] = t(thisTM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+}#
+summary(myxcM1s)#
+summary(myxtM1s)#
+summary(myxcM0s)#
+summary(myxtM0s)#
+#
+myxcs = c(myxcM0s,myxcM1s);#
+myxts = c(myxtM0s,myxtM1s);#
+mymarginal = c(myxcs,myxts)#
+#
+mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+# DENSITY RATIO ESTIMATION#
+#
+# install.packages("densratio")#
+library(densratio)#
+densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+new_x = seq(from=0,to=1,by = 0.01)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+par(mfrow=c(1,2))#
+plot(new_x, w_hat1, pch=19, main=thismethod)#
+plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+densratio_obj1#
+#
+summary(densratio_obj1)
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "RuLSIF"#
+#
+myn = 4000;#
+#
+mycuts = c(0, 0.5, 1)#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+for (i in 1:(myn/4)) {#
+	thisCM1multinom = mycM1grps[,i];#
+	myxcM1s[i] = t(thisCM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM1multinom = mytM1grps[,i];#
+	myxtM1s[i] = t(thisTM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisCM0multinom = mycM0grps[,i];#
+	myxcM0s[i] = t(thisCM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM0multinom = mytM0grps[,i];#
+	myxtM0s[i] = t(thisTM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+}#
+summary(myxcM1s)#
+summary(myxtM1s)#
+summary(myxcM0s)#
+summary(myxtM0s)#
+#
+myxcs = c(myxcM0s,myxcM1s);#
+myxts = c(myxtM0s,myxtM1s);#
+mymarginal = c(myxcs,myxts)#
+#
+mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+# DENSITY RATIO ESTIMATION#
+#
+# install.packages("densratio")#
+library(densratio)#
+densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+new_x = seq(from=0,to=1,by = 0.01)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+par(mfrow=c(1,2))#
+plot(new_x, w_hat1, pch=19, main=thismethod)#
+plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+densratio_obj1#
+#
+densratio_obj3#
+hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+hat_pi_c#
+hat_pi_t#
+hat_gsubc = w_hat1 * hat_pi_c;#
+hat_gsubt = w_hat3 * hat_pi_t;#
+# boxplot(myxcM0s,myxcM1s,myxtM1s,myxtM0s)#
+#
+# ESTIMATE THETA0 AND THETA1#
+#
+theta0vec = rep(NA,length(w_hat1));#
+theta1vec = rep(NA,length(w_hat1));#
+#
+for (i in 1:length(w_hat1)) {#
+	thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+	theta0vec[i] = thismax - hat_gsubc[i];#
+	theta1vec[i] = thismax - hat_gsubt[i];#
+}#
+#
+DRapproachTheta0 = mean(theta0vec)#
+#
+DRapproachTheta1 = mean(theta1vec)#
+#
+DRapproachTheta0#
+#
+DRapproachTheta1
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "RuLSIF"#
+#
+myn = 4000;#
+#
+mycuts = c(0, 0.5, 1)#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+for (i in 1:(myn/4)) {#
+	thisCM1multinom = mycM1grps[,i];#
+	myxcM1s[i] = t(thisCM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM1multinom = mytM1grps[,i];#
+	myxtM1s[i] = t(thisTM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisCM0multinom = mycM0grps[,i];#
+	myxcM0s[i] = t(thisCM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM0multinom = mytM0grps[,i];#
+	myxtM0s[i] = t(thisTM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+}#
+summary(myxcM1s)#
+summary(myxtM1s)#
+summary(myxcM0s)#
+summary(myxtM0s)#
+#
+myxcs = c(myxcM0s,myxcM1s);#
+myxts = c(myxtM0s,myxtM1s);#
+mymarginal = c(myxcs,myxts)#
+#
+mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+# DENSITY RATIO ESTIMATION#
+#
+# install.packages("densratio")#
+library(densratio)#
+densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+new_x = seq(from=0,to=1,by = 0.001)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+par(mfrow=c(1,2))#
+plot(new_x, w_hat1, pch=19, main=thismethod)#
+plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+densratio_obj1#
+#
+densratio_obj3#
+hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+hat_pi_c#
+hat_pi_t#
+hat_gsubc = w_hat1 * hat_pi_c;#
+hat_gsubt = w_hat3 * hat_pi_t;#
+# boxplot(myxcM0s,myxcM1s,myxtM1s,myxtM0s)#
+#
+# ESTIMATE THETA0 AND THETA1#
+#
+theta0vec = rep(NA,length(w_hat1));#
+theta1vec = rep(NA,length(w_hat1));#
+#
+for (i in 1:length(w_hat1)) {#
+	thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+	theta0vec[i] = thismax - hat_gsubc[i];#
+	theta1vec[i] = thismax - hat_gsubt[i];#
+}#
+#
+DRapproachTheta0 = mean(theta0vec)#
+#
+DRapproachTheta1 = mean(theta1vec)#
+#
+DRapproachTheta0#
+#
+DRapproachTheta1
+0.5*0.8
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "RuLSIF"#
+#
+myn = 40000;#
+#
+mycuts = c(0, 0.5, 1)#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+for (i in 1:(myn/4)) {#
+	thisCM1multinom = mycM1grps[,i];#
+	myxcM1s[i] = t(thisCM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM1multinom = mytM1grps[,i];#
+	myxtM1s[i] = t(thisTM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisCM0multinom = mycM0grps[,i];#
+	myxcM0s[i] = t(thisCM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM0multinom = mytM0grps[,i];#
+	myxtM0s[i] = t(thisTM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+}#
+summary(myxcM1s)#
+summary(myxtM1s)#
+summary(myxcM0s)#
+summary(myxtM0s)#
+#
+myxcs = c(myxcM0s,myxcM1s);#
+myxts = c(myxtM0s,myxtM1s);#
+mymarginal = c(myxcs,myxts)#
+#
+mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+# DENSITY RATIO ESTIMATION#
+#
+# install.packages("densratio")#
+library(densratio)#
+densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+new_x = seq(from=0,to=1,by = 0.001)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+par(mfrow=c(1,2))#
+plot(new_x, w_hat1, pch=19, main=thismethod)#
+plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+densratio_obj1#
+#
+densratio_obj3#
+hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+hat_pi_c#
+hat_pi_t#
+hat_gsubc = w_hat1 * hat_pi_c;#
+hat_gsubt = w_hat3 * hat_pi_t;#
+# boxplot(myxcM0s,myxcM1s,myxtM1s,myxtM0s)#
+#
+# ESTIMATE THETA0 AND THETA1#
+#
+theta0vec = rep(NA,length(w_hat1));#
+theta1vec = rep(NA,length(w_hat1));#
+#
+for (i in 1:length(w_hat1)) {#
+	thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+	theta0vec[i] = thismax - hat_gsubc[i];#
+	theta1vec[i] = thismax - hat_gsubt[i];#
+}#
+#
+DRapproachTheta0 = mean(theta0vec)#
+#
+DRapproachTheta1 = mean(theta1vec)#
+#
+DRapproachTheta0#
+#
+DRapproachTheta1
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+#
+myn = 4000;#
+#
+mycuts = c(0, 0.5, 1)#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+for (i in 1:(myn/4)) {#
+	thisCM1multinom = mycM1grps[,i];#
+	myxcM1s[i] = t(thisCM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM1multinom = mytM1grps[,i];#
+	myxtM1s[i] = t(thisTM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisCM0multinom = mycM0grps[,i];#
+	myxcM0s[i] = t(thisCM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM0multinom = mytM0grps[,i];#
+	myxtM0s[i] = t(thisTM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+}#
+summary(myxcM1s)#
+summary(myxtM1s)#
+summary(myxcM0s)#
+summary(myxtM0s)#
+#
+myxcs = c(myxcM0s,myxcM1s);#
+myxts = c(myxtM0s,myxtM1s);#
+mymarginal = c(myxcs,myxts)#
+#
+mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+# DENSITY RATIO ESTIMATION#
+#
+# install.packages("densratio")#
+library(densratio)#
+densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+new_x = seq(from=0,to=1,by = 0.001)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+par(mfrow=c(1,2))#
+plot(new_x, w_hat1, pch=19, main=thismethod)#
+plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+densratio_obj1#
+#
+densratio_obj3#
+hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+hat_pi_c#
+hat_pi_t#
+hat_gsubc = w_hat1 * hat_pi_c;#
+hat_gsubt = w_hat3 * hat_pi_t;#
+# ESTIMATE THETA0 AND THETA1#
+#
+theta0vec = rep(NA,length(w_hat1));#
+theta1vec = rep(NA,length(w_hat1));#
+#
+for (i in 1:length(w_hat1)) {#
+	thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+	theta0vec[i] = thismax - hat_gsubc[i];#
+	theta1vec[i] = thismax - hat_gsubt[i];#
+}#
+#
+DRapproachTheta0 = mean(theta0vec)#
+seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+DRapproachTheta1 = mean(theta1vec)#
+seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+DRapproachTheta0#
+seDRapproachTheta0#
+#
+DRapproachTheta1#
+seDRapproachTheta1
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+#
+myn = 4000;#
+#
+mycuts = c(0, 0.5, 1)#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+for (i in 1:(myn/4)) {#
+	thisCM1multinom = mycM1grps[,i];#
+	myxcM1s[i] = t(thisCM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM1multinom = mytM1grps[,i];#
+	myxtM1s[i] = t(thisTM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisCM0multinom = mycM0grps[,i];#
+	myxcM0s[i] = t(thisCM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM0multinom = mytM0grps[,i];#
+	myxtM0s[i] = t(thisTM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+}#
+summary(myxcM1s)#
+summary(myxtM1s)#
+summary(myxcM0s)#
+summary(myxtM0s)#
+#
+myxcs = c(myxcM0s,myxcM1s);#
+myxts = c(myxtM0s,myxtM1s);#
+mymarginal = c(myxcs,myxts)#
+#
+mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+# DENSITY RATIO ESTIMATION#
+#
+# install.packages("densratio")#
+library(densratio)#
+densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+new_x = seq(from=0,to=1,by = 0.001)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+par(mfrow=c(1,2))#
+plot(new_x, w_hat1, pch=19, main=thismethod)#
+plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+densratio_obj1#
+#
+densratio_obj3#
+hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+hat_pi_c#
+hat_pi_t#
+hat_gsubc = w_hat1 * hat_pi_c;#
+hat_gsubt = w_hat3 * hat_pi_t;#
+# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+theta0vec = rep(NA,length(w_hat1));#
+theta1vec = rep(NA,length(w_hat1));#
+#
+for (i in 1:length(w_hat1)) {#
+	thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+	theta0vec[i] = thismax - hat_gsubc[i];#
+	theta1vec[i] = thismax - hat_gsubt[i];#
+}#
+#
+DRapproachTheta0 = mean(theta0vec)#
+seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+DRapproachTheta1 = mean(theta1vec)#
+seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+DRapproachTheta0#
+seDRapproachTheta0#
+#
+DRapproachTheta1#
+seDRapproachTheta1#
+# ESTIMATE THETA0 AND THETA1 WITH JANES TREATMENTSELECTION PACKAGE#
+#
+library(TreatmentSelection)#
+#
+myoutcomes = c(rep(1,length(myxcM1s)),rep(0,length(myxcM0s)),rep(1,length(myxtM1s)),rep(0,length(myxtM0s)));#
+mymarker = c(myxcM1s,myxcM0s,myxtM1s,myxtM0s);#
+mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+mytrtsel#
+#
+tmp#
+#
+JanesTheta = tmp$estimates$ER.mkrbased.emp#
+#
+JanesTheta
+help(trtsel)
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+#
+myn = 4000;#
+#
+mycuts = c(0, 0.5, 1)#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+for (i in 1:(myn/4)) {#
+	thisCM1multinom = mycM1grps[,i];#
+	myxcM1s[i] = t(thisCM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM1multinom = mytM1grps[,i];#
+	myxtM1s[i] = t(thisTM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisCM0multinom = mycM0grps[,i];#
+	myxcM0s[i] = t(thisCM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM0multinom = mytM0grps[,i];#
+	myxtM0s[i] = t(thisTM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+}#
+summary(myxcM1s)#
+summary(myxtM1s)#
+summary(myxcM0s)#
+summary(myxtM0s)#
+#
+myxcs = c(myxcM0s,myxcM1s);#
+myxts = c(myxtM0s,myxtM1s);#
+mymarginal = c(myxcs,myxts)#
+#
+mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+# DENSITY RATIO ESTIMATION#
+#
+# install.packages("densratio")#
+library(densratio)#
+densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+new_x = seq(from=0,to=1,by = 0.001)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+par(mfrow=c(1,2))#
+plot(new_x, w_hat1, pch=19, main=thismethod)#
+plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+densratio_obj1#
+#
+densratio_obj3#
+hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+hat_pi_c#
+hat_pi_t#
+hat_gsubc = w_hat1 * hat_pi_c;#
+hat_gsubt = w_hat3 * hat_pi_t;#
+# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+theta0vec = rep(NA,length(w_hat1));#
+theta1vec = rep(NA,length(w_hat1));#
+#
+for (i in 1:length(w_hat1)) {#
+	thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+	theta0vec[i] = thismax - hat_gsubc[i];#
+	theta1vec[i] = thismax - hat_gsubt[i];#
+}#
+#
+DRapproachTheta0 = mean(theta0vec)#
+seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+DRapproachTheta1 = mean(theta1vec)#
+seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+DRapproachTheta0#
+seDRapproachTheta0#
+#
+DRapproachTheta1#
+seDRapproachTheta1#
+# ESTIMATE THETA0 AND THETA1 WITH JANES TREATMENTSELECTION PACKAGE#
+#
+library(TreatmentSelection)#
+#
+myoutcomes = c(rep(1,length(myxcM1s)),rep(0,length(myxcM0s)),rep(1,length(myxtM1s)),rep(0,length(myxtM0s)));#
+mymarker = c(myxcM1s,myxcM0s,myxtM1s,myxtM0s);#
+mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+mytrtsel#
+#
+tmp#
+#
+JanesTheta1 = tmp$estimates$ER.mkrbased.emp#
+#
+JanesTheta1#
+#
+datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+JanesTheta0 = tmp$estimates$ER.mkrbased.emp#
+#
+JanesTheta0
+tmp[1]
+tmp[1]$Theta.emp
+tmp[1]$estimates
+tmp[1]$estimates$Theta.emp
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+#
+myn = 4000;#
+#
+mycuts = c(0, 0.5, 1)#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+for (i in 1:(myn/4)) {#
+	thisCM1multinom = mycM1grps[,i];#
+	myxcM1s[i] = t(thisCM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM1multinom = mytM1grps[,i];#
+	myxtM1s[i] = t(thisTM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisCM0multinom = mycM0grps[,i];#
+	myxcM0s[i] = t(thisCM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM0multinom = mytM0grps[,i];#
+	myxtM0s[i] = t(thisTM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+}#
+summary(myxcM1s)#
+summary(myxtM1s)#
+summary(myxcM0s)#
+summary(myxtM0s)#
+#
+myxcs = c(myxcM0s,myxcM1s);#
+myxts = c(myxtM0s,myxtM1s);#
+mymarginal = c(myxcs,myxts)#
+#
+mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+# DENSITY RATIO ESTIMATION#
+#
+# install.packages("densratio")#
+library(densratio)#
+densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+new_x = seq(from=0,to=1,by = 0.001)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+par(mfrow=c(1,2))#
+plot(new_x, w_hat1, pch=19, main=thismethod)#
+plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+densratio_obj1#
+#
+densratio_obj3#
+hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+hat_pi_c#
+hat_pi_t#
+hat_gsubc = w_hat1 * hat_pi_c;#
+hat_gsubt = w_hat3 * hat_pi_t;#
+# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+theta0vec = rep(NA,length(w_hat1));#
+theta1vec = rep(NA,length(w_hat1));#
+#
+for (i in 1:length(w_hat1)) {#
+	thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+	theta0vec[i] = thismax - hat_gsubc[i];#
+	theta1vec[i] = thismax - hat_gsubt[i];#
+}#
+#
+DRapproachTheta0 = mean(theta0vec)#
+seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+DRapproachTheta1 = mean(theta1vec)#
+seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+DRapproachTheta0#
+seDRapproachTheta0#
+#
+DRapproachTheta1#
+seDRapproachTheta1#
+# ESTIMATE THETA0 AND THETA1 WITH JANES TREATMENTSELECTION PACKAGE#
+#
+library(TreatmentSelection)#
+#
+myoutcomes = c(rep(1,length(myxcM1s)),rep(0,length(myxcM0s)),rep(1,length(myxtM1s)),rep(0,length(myxtM0s)));#
+mymarker = c(myxcM1s,myxcM0s,myxtM1s,myxtM0s);#
+mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+mytrtsel#
+#
+tmp#
+#
+JanesTheta1 = tmp$estimates$Theta.emp#
+#
+JanesTheta1#
+#
+datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+JanesTheta0 = tmp$estimates$Theta.emp#
+JanesTheta0
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+#
+myn = 800;#
+#
+mycuts = c(0, 0.5, 1)#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+for (i in 1:(myn/4)) {#
+	thisCM1multinom = mycM1grps[,i];#
+	myxcM1s[i] = t(thisCM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM1multinom = mytM1grps[,i];#
+	myxtM1s[i] = t(thisTM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisCM0multinom = mycM0grps[,i];#
+	myxcM0s[i] = t(thisCM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM0multinom = mytM0grps[,i];#
+	myxtM0s[i] = t(thisTM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+}#
+summary(myxcM1s)#
+summary(myxtM1s)#
+summary(myxcM0s)#
+summary(myxtM0s)#
+#
+myxcs = c(myxcM0s,myxcM1s);#
+myxts = c(myxtM0s,myxtM1s);#
+mymarginal = c(myxcs,myxts)#
+#
+mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+# DENSITY RATIO ESTIMATION#
+#
+# install.packages("densratio")#
+library(densratio)#
+densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+new_x = seq(from=0,to=1,by = 0.001)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+par(mfrow=c(1,2))#
+plot(new_x, w_hat1, pch=19, main=thismethod)#
+plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+densratio_obj1#
+#
+densratio_obj3#
+hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+hat_pi_c#
+hat_pi_t#
+hat_gsubc = w_hat1 * hat_pi_c;#
+hat_gsubt = w_hat3 * hat_pi_t;#
+# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+theta0vec = rep(NA,length(w_hat1));#
+theta1vec = rep(NA,length(w_hat1));#
+#
+for (i in 1:length(w_hat1)) {#
+	thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+	theta0vec[i] = thismax - hat_gsubc[i];#
+	theta1vec[i] = thismax - hat_gsubt[i];#
+}#
+#
+DRapproachTheta0 = mean(theta0vec)#
+seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+DRapproachTheta1 = mean(theta1vec)#
+seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+DRapproachTheta0#
+seDRapproachTheta0#
+#
+DRapproachTheta1#
+seDRapproachTheta1#
+# ESTIMATE THETA0 AND THETA1 WITH JANES TREATMENTSELECTION PACKAGE#
+#
+library(TreatmentSelection)#
+#
+myoutcomes = c(rep(1,length(myxcM1s)),rep(0,length(myxcM0s)),rep(1,length(myxtM1s)),rep(0,length(myxtM0s)));#
+mymarker = c(myxcM1s,myxcM0s,myxtM1s,myxtM0s);#
+mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+mytrtsel#
+#
+tmp#
+#
+JanesTheta1 = tmp$estimates$Theta.emp#
+#
+JanesTheta1#
+#
+datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+JanesTheta0 = tmp$estimates$Theta.emp#
+JanesTheta0
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "RuLSIF"#
+#
+myn = 800;#
+#
+mycuts = c(0, 0.5, 1)#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+for (i in 1:(myn/4)) {#
+	thisCM1multinom = mycM1grps[,i];#
+	myxcM1s[i] = t(thisCM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM1multinom = mytM1grps[,i];#
+	myxtM1s[i] = t(thisTM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisCM0multinom = mycM0grps[,i];#
+	myxcM0s[i] = t(thisCM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM0multinom = mytM0grps[,i];#
+	myxtM0s[i] = t(thisTM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+}#
+summary(myxcM1s)#
+summary(myxtM1s)#
+summary(myxcM0s)#
+summary(myxtM0s)#
+#
+myxcs = c(myxcM0s,myxcM1s);#
+myxts = c(myxtM0s,myxtM1s);#
+mymarginal = c(myxcs,myxts)#
+#
+mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+# DENSITY RATIO ESTIMATION#
+#
+# install.packages("densratio")#
+library(densratio)#
+densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+new_x = seq(from=0,to=1,by = 0.001)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+par(mfrow=c(1,2))#
+plot(new_x, w_hat1, pch=19, main=thismethod)#
+plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+densratio_obj1#
+#
+densratio_obj3#
+hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+hat_pi_c#
+hat_pi_t#
+hat_gsubc = w_hat1 * hat_pi_c;#
+hat_gsubt = w_hat3 * hat_pi_t;#
+# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+theta0vec = rep(NA,length(w_hat1));#
+theta1vec = rep(NA,length(w_hat1));#
+#
+for (i in 1:length(w_hat1)) {#
+	thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+	theta0vec[i] = thismax - hat_gsubc[i];#
+	theta1vec[i] = thismax - hat_gsubt[i];#
+}#
+#
+DRapproachTheta0 = mean(theta0vec)#
+seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+DRapproachTheta1 = mean(theta1vec)#
+seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+DRapproachTheta0#
+seDRapproachTheta0#
+#
+DRapproachTheta1#
+seDRapproachTheta1#
+# ESTIMATE THETA0 AND THETA1 WITH JANES TREATMENTSELECTION PACKAGE#
+#
+library(TreatmentSelection)#
+#
+myoutcomes = c(rep(1,length(myxcM1s)),rep(0,length(myxcM0s)),rep(1,length(myxtM1s)),rep(0,length(myxtM0s)));#
+mymarker = c(myxcM1s,myxcM0s,myxtM1s,myxtM0s);#
+mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+mytrtsel#
+#
+tmp#
+#
+JanesTheta1 = tmp$estimates$Theta.emp#
+#
+JanesTheta1#
+#
+datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+JanesTheta0 = tmp$estimates$Theta.emp#
+JanesTheta0
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "KLIEP"#
+#
+myn = 800;#
+#
+mycuts = c(0, 0.5, 1)#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+for (i in 1:(myn/4)) {#
+	thisCM1multinom = mycM1grps[,i];#
+	myxcM1s[i] = t(thisCM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM1multinom = mytM1grps[,i];#
+	myxtM1s[i] = t(thisTM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisCM0multinom = mycM0grps[,i];#
+	myxcM0s[i] = t(thisCM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM0multinom = mytM0grps[,i];#
+	myxtM0s[i] = t(thisTM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+}#
+summary(myxcM1s)#
+summary(myxtM1s)#
+summary(myxcM0s)#
+summary(myxtM0s)#
+#
+myxcs = c(myxcM0s,myxcM1s);#
+myxts = c(myxtM0s,myxtM1s);#
+mymarginal = c(myxcs,myxts)#
+#
+mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+# DENSITY RATIO ESTIMATION#
+#
+# install.packages("densratio")#
+library(densratio)#
+densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+new_x = seq(from=0,to=1,by = 0.001)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+par(mfrow=c(1,2))#
+plot(new_x, w_hat1, pch=19, main=thismethod)#
+plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+densratio_obj1#
+#
+densratio_obj3#
+hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+hat_pi_c#
+hat_pi_t#
+hat_gsubc = w_hat1 * hat_pi_c;#
+hat_gsubt = w_hat3 * hat_pi_t;#
+# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+theta0vec = rep(NA,length(w_hat1));#
+theta1vec = rep(NA,length(w_hat1));#
+#
+for (i in 1:length(w_hat1)) {#
+	thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+	theta0vec[i] = thismax - hat_gsubc[i];#
+	theta1vec[i] = thismax - hat_gsubt[i];#
+}#
+#
+DRapproachTheta0 = mean(theta0vec)#
+seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+DRapproachTheta1 = mean(theta1vec)#
+seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+DRapproachTheta0#
+seDRapproachTheta0#
+#
+DRapproachTheta1#
+seDRapproachTheta1#
+# ESTIMATE THETA0 AND THETA1 WITH JANES TREATMENTSELECTION PACKAGE#
+#
+library(TreatmentSelection)#
+#
+myoutcomes = c(rep(1,length(myxcM1s)),rep(0,length(myxcM0s)),rep(1,length(myxtM1s)),rep(0,length(myxtM0s)));#
+mymarker = c(myxcM1s,myxcM0s,myxtM1s,myxtM0s);#
+mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+mytrtsel#
+#
+tmp#
+#
+JanesTheta1 = tmp$estimates$Theta.emp#
+#
+JanesTheta1#
+#
+datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+JanesTheta0 = tmp$estimates$Theta.emp#
+JanesTheta0
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "KLIEP"#
+#
+myn = 10000;#
+#
+mycuts = c(0, 0.5, 1)#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+for (i in 1:(myn/4)) {#
+	thisCM1multinom = mycM1grps[,i];#
+	myxcM1s[i] = t(thisCM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM1multinom = mytM1grps[,i];#
+	myxtM1s[i] = t(thisTM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisCM0multinom = mycM0grps[,i];#
+	myxcM0s[i] = t(thisCM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM0multinom = mytM0grps[,i];#
+	myxtM0s[i] = t(thisTM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+}#
+summary(myxcM1s)#
+summary(myxtM1s)#
+summary(myxcM0s)#
+summary(myxtM0s)#
+#
+myxcs = c(myxcM0s,myxcM1s);#
+myxts = c(myxtM0s,myxtM1s);#
+mymarginal = c(myxcs,myxts)#
+#
+mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+# DENSITY RATIO ESTIMATION#
+#
+# install.packages("densratio")#
+library(densratio)#
+densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+new_x = seq(from=0,to=1,by = 0.001)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+#
+par(mfrow=c(1,2))#
+plot(new_x, w_hat1, pch=19, main=thismethod)#
+plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+densratio_obj1#
+#
+densratio_obj3#
+hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+hat_pi_c#
+hat_pi_t#
+hat_gsubc = w_hat1 * hat_pi_c;#
+hat_gsubt = w_hat3 * hat_pi_t;#
+# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+theta0vec = rep(NA,length(w_hat1));#
+theta1vec = rep(NA,length(w_hat1));#
+#
+for (i in 1:length(w_hat1)) {#
+	thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+	theta0vec[i] = thismax - hat_gsubc[i];#
+	theta1vec[i] = thismax - hat_gsubt[i];#
+}#
+#
+DRapproachTheta0 = mean(theta0vec)#
+seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+DRapproachTheta1 = mean(theta1vec)#
+seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+DRapproachTheta0#
+seDRapproachTheta0#
+#
+DRapproachTheta1#
+seDRapproachTheta1#
+# ESTIMATE THETA0 AND THETA1 WITH JANES TREATMENTSELECTION PACKAGE#
+#
+library(TreatmentSelection)#
+#
+myoutcomes = c(rep(1,length(myxcM1s)),rep(0,length(myxcM0s)),rep(1,length(myxtM1s)),rep(0,length(myxtM0s)));#
+mymarker = c(myxcM1s,myxcM0s,myxtM1s,myxtM0s);#
+mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+mytrtsel#
+#
+tmp#
+#
+JanesTheta1 = tmp$estimates$Theta.emp#
+#
+JanesTheta1#
+#
+datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+JanesTheta0 = tmp$estimates$Theta.emp#
+JanesTheta0
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+#
+myn = 10000;#
+#
+mycuts = c(0, 0.5, 1)#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+for (i in 1:(myn/4)) {#
+	thisCM1multinom = mycM1grps[,i];#
+	myxcM1s[i] = t(thisCM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM1multinom = mytM1grps[,i];#
+	myxtM1s[i] = t(thisTM1multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisCM0multinom = mycM0grps[,i];#
+	myxcM0s[i] = t(thisCM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+	thisTM0multinom = mytM0grps[,i];#
+	myxtM0s[i] = t(thisTM0multinom) %*% #
+	c(runif(1,min=mycuts[1],max=mycuts[2]),#
+	  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+}#
+summary(myxcM1s)#
+summary(myxtM1s)#
+summary(myxcM0s)#
+summary(myxtM0s)#
+#
+myxcs = c(myxcM0s,myxcM1s);#
+myxts = c(myxtM0s,myxtM1s);#
+mymarginal = c(myxcs,myxts)#
+#
+mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+# DENSITY RATIO ESTIMATION#
+#
+# install.packages("densratio")#
+library(densratio)#
+densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+new_x = seq(from=0,to=1,by = 0.001)#
+#
+w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+par(mfrow=c(1,2))#
+#
+plot(new_x, w_hat1, pch=19, main=thismethod)#
+plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+densratio_obj1#
+#
+densratio_obj3#
+hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+hat_pi_c#
+hat_pi_t#
+hat_gsubc = w_hat1 * hat_pi_c;#
+hat_gsubt = w_hat3 * hat_pi_t;#
+# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+theta0vec = rep(NA,length(w_hat1));#
+theta1vec = rep(NA,length(w_hat1));#
+#
+for (i in 1:length(w_hat1)) {#
+	thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+	theta0vec[i] = thismax - hat_gsubc[i];#
+	theta1vec[i] = thismax - hat_gsubt[i];#
+}#
+#
+DRapproachTheta0 = mean(theta0vec)#
+seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+DRapproachTheta1 = mean(theta1vec)#
+seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+DRapproachTheta0#
+seDRapproachTheta0#
+#
+DRapproachTheta1#
+seDRapproachTheta1#
+# ESTIMATE THETA0 AND THETA1 WITH JANES TREATMENTSELECTION PACKAGE#
+#
+library(TreatmentSelection)#
+#
+myoutcomes = c(rep(1,length(myxcM1s)),rep(0,length(myxcM0s)),rep(1,length(myxtM1s)),rep(0,length(myxtM0s)));#
+mymarker = c(myxcM1s,myxcM0s,myxtM1s,myxtM0s);#
+mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+mytrtsel#
+#
+tmp#
+#
+JanesTheta1 = tmp$estimates$Theta.emp#
+#
+JanesTheta1#
+#
+datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+JanesTheta0 = tmp$estimates$Theta.emp#
+JanesTheta0
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+myn = 400;#
+MCRUNS = 2;#
+#
+mycuts = c(0, 0.5, 1)#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+#
+DRtheta0s = rep(NA,MCRUNS)#
+DRtheta1s = rep(NA,MCRUNS)#
+HJtheta0s = rep(NA,MCRUNS)#
+HJtheta1s = rep(NA,MCRUNS)#
+#
+for (thismc in 1:MCRUNS)  {#
+	for (i in 1:(myn/4)) {#
+		thisCM1multinom = mycM1grps[,i];#
+		myxcM1s[i] = t(thisCM1multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+		thisTM1multinom = mytM1grps[,i];#
+		myxtM1s[i] = t(thisTM1multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+		thisCM0multinom = mycM0grps[,i];#
+		myxcM0s[i] = t(thisCM0multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+		thisTM0multinom = mytM0grps[,i];#
+		myxtM0s[i] = t(thisTM0multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+	}#
+	summary(myxcM1s)#
+	summary(myxtM1s)#
+	summary(myxcM0s)#
+	summary(myxtM0s)#
+#
+	myxcs = c(myxcM0s,myxcM1s);#
+	myxts = c(myxtM0s,myxtM1s);#
+	mymarginal = c(myxcs,myxts)#
+#
+	mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	# DENSITY RATIO ESTIMATION#
+#
+	# install.packages("densratio")#
+	library(densratio)#
+	densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+	densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+	new_x = seq(from=0,to=1,by = 0.001)#
+#
+	w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+	w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+	par(mfrow=c(1,2))#
+#
+	plot(new_x, w_hat1, pch=19, main=thismethod)#
+	plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+	densratio_obj1#
+#
+	densratio_obj3#
+	hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+	hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+	hat_pi_c#
+	hat_pi_t#
+	hat_gsubc = w_hat1 * hat_pi_c;#
+	hat_gsubt = w_hat3 * hat_pi_t;#
+	# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+	theta0vec = rep(NA,length(w_hat1));#
+	theta1vec = rep(NA,length(w_hat1));#
+#
+	for (i in 1:length(w_hat1)) {#
+		thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+		theta0vec[i] = thismax - hat_gsubc[i];#
+		theta1vec[i] = thismax - hat_gsubt[i];#
+	}#
+#
+	DRapproachTheta0 = mean(theta0vec)#
+	seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+	DRapproachTheta1 = mean(theta1vec)#
+	seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+	DRapproachTheta0#
+	seDRapproachTheta0#
+#
+	DRapproachTheta1#
+	seDRapproachTheta1#
+	# ESTIMATE THETA0 AND THETA1 WITH JANES TREATMENTSELECTION PACKAGE#
+#
+	library(TreatmentSelection)#
+#
+	myoutcomes = c(rep(1,length(myxcM1s)),rep(0,length(myxcM0s)),rep(1,length(myxtM1s)),rep(0,length(myxtM0s)));#
+	mymarker = c(myxcM1s,myxcM0s,myxtM1s,myxtM0s);#
+	mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	mytrtsel#
+#
+	tmp#
+#
+	JanesTheta1 = tmp$estimates$Theta.emp#
+#
+	JanesTheta1#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	JanesTheta0 = tmp$estimates$Theta.emp#
+	JanesTheta0#
+	}#
+	DRtheta0s[thismc] = DRapproachTheta0;#
+	DRtheta1s[thismc] = DRapproachTheta1;#
+	HJtheta0s[thismc] = JanesTheta0; #
+	HJtheta1s[thismc] = JanesTheta1;#
+}
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+myn = 400;#
+MCRUNS = 2;#
+#
+mycuts = c(0, 0.5, 1)#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+#
+DRtheta0s = rep(NA,MCRUNS)#
+DRtheta1s = rep(NA,MCRUNS)#
+HJtheta0s = rep(NA,MCRUNS)#
+HJtheta1s = rep(NA,MCRUNS)#
+#
+for (thismc in 1:MCRUNS)  {#
+	for (i in 1:(myn/4)) {#
+		thisCM1multinom = mycM1grps[,i];#
+		myxcM1s[i] = t(thisCM1multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+		thisTM1multinom = mytM1grps[,i];#
+		myxtM1s[i] = t(thisTM1multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+		thisCM0multinom = mycM0grps[,i];#
+		myxcM0s[i] = t(thisCM0multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+		thisTM0multinom = mytM0grps[,i];#
+		myxtM0s[i] = t(thisTM0multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+	}#
+	summary(myxcM1s)#
+	summary(myxtM1s)#
+	summary(myxcM0s)#
+	summary(myxtM0s)#
+#
+	myxcs = c(myxcM0s,myxcM1s);#
+	myxts = c(myxtM0s,myxtM1s);#
+	mymarginal = c(myxcs,myxts)#
+#
+	mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	# DENSITY RATIO ESTIMATION#
+#
+	# install.packages("densratio")#
+	library(densratio)#
+	densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+	densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+	new_x = seq(from=0,to=1,by = 0.001)#
+#
+	w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+	w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+	par(mfrow=c(1,2))#
+#
+	plot(new_x, w_hat1, pch=19, main=thismethod)#
+	plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+	densratio_obj1#
+#
+	densratio_obj3#
+	hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+	hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+	hat_pi_c#
+	hat_pi_t#
+	hat_gsubc = w_hat1 * hat_pi_c;#
+	hat_gsubt = w_hat3 * hat_pi_t;#
+	# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+	theta0vec = rep(NA,length(w_hat1));#
+	theta1vec = rep(NA,length(w_hat1));#
+#
+	for (i in 1:length(w_hat1)) {#
+		thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+		theta0vec[i] = thismax - hat_gsubc[i];#
+		theta1vec[i] = thismax - hat_gsubt[i];#
+	}#
+#
+	DRapproachTheta0 = mean(theta0vec)#
+	seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+	DRapproachTheta1 = mean(theta1vec)#
+	seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+	DRapproachTheta0#
+	seDRapproachTheta0#
+#
+	DRapproachTheta1#
+	seDRapproachTheta1#
+	# ESTIMATE THETA0 AND THETA1 WITH JANES TREATMENTSELECTION PACKAGE#
+#
+	library(TreatmentSelection)#
+#
+	myoutcomes = c(rep(1,length(myxcM1s)),rep(0,length(myxcM0s)),rep(1,length(myxtM1s)),rep(0,length(myxtM0s)));#
+	mymarker = c(myxcM1s,myxcM0s,myxtM1s,myxtM0s);#
+	mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	mytrtsel#
+#
+	tmp#
+#
+	JanesTheta1 = tmp$estimates$Theta.emp#
+#
+	JanesTheta1#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	JanesTheta0 = tmp$estimates$Theta.emp#
+	JanesTheta0#
+#
+	DRtheta0s[thismc] = DRapproachTheta0;#
+	DRtheta1s[thismc] = DRapproachTheta1;#
+	HJtheta0s[thismc] = JanesTheta0; #
+	HJtheta1s[thismc] = JanesTheta1;#
+}
+DRTheta0s
+DRtheta0s
+DRtheta1s
+HJtheta1s
+HJtheta0s
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+myn = 4000;#
+MCRUNS = 100;#
+#
+mycuts = c(0, 0.5, 1)#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+#
+DRtheta0s = rep(NA,MCRUNS)#
+DRtheta1s = rep(NA,MCRUNS)#
+HJtheta0s = rep(NA,MCRUNS)#
+HJtheta1s = rep(NA,MCRUNS)#
+#
+for (thismc in 1:MCRUNS)  {#
+	for (i in 1:(myn/4)) {#
+		thisCM1multinom = mycM1grps[,i];#
+		myxcM1s[i] = t(thisCM1multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+		thisTM1multinom = mytM1grps[,i];#
+		myxtM1s[i] = t(thisTM1multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+		thisCM0multinom = mycM0grps[,i];#
+		myxcM0s[i] = t(thisCM0multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+		thisTM0multinom = mytM0grps[,i];#
+		myxtM0s[i] = t(thisTM0multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+	}#
+	summary(myxcM1s)#
+	summary(myxtM1s)#
+	summary(myxcM0s)#
+	summary(myxtM0s)#
+#
+	myxcs = c(myxcM0s,myxcM1s);#
+	myxts = c(myxtM0s,myxtM1s);#
+	mymarginal = c(myxcs,myxts)#
+#
+	mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	# DENSITY RATIO ESTIMATION#
+#
+	# install.packages("densratio")#
+	library(densratio)#
+	densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+	densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+	new_x = seq(from=0,to=1,by = 0.001)#
+#
+	w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+	w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+	par(mfrow=c(1,2))#
+#
+	plot(new_x, w_hat1, pch=19, main=thismethod)#
+	plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+	densratio_obj1#
+#
+	densratio_obj3#
+	hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+	hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+	hat_pi_c#
+	hat_pi_t#
+	hat_gsubc = w_hat1 * hat_pi_c;#
+	hat_gsubt = w_hat3 * hat_pi_t;#
+	# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+	theta0vec = rep(NA,length(w_hat1));#
+	theta1vec = rep(NA,length(w_hat1));#
+#
+	for (i in 1:length(w_hat1)) {#
+		thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+		theta0vec[i] = thismax - hat_gsubc[i];#
+		theta1vec[i] = thismax - hat_gsubt[i];#
+	}#
+#
+	DRapproachTheta0 = mean(theta0vec)#
+	seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+	DRapproachTheta1 = mean(theta1vec)#
+	seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+	DRapproachTheta0#
+	seDRapproachTheta0#
+#
+	DRapproachTheta1#
+	seDRapproachTheta1#
+	# ESTIMATE THETA0 AND THETA1 WITH JANES TREATMENTSELECTION PACKAGE#
+#
+	library(TreatmentSelection)#
+#
+	myoutcomes = c(rep(1,length(myxcM1s)),rep(0,length(myxcM0s)),rep(1,length(myxtM1s)),rep(0,length(myxtM0s)));#
+	mymarker = c(myxcM1s,myxcM0s,myxtM1s,myxtM0s);#
+	mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	mytrtsel#
+#
+	tmp#
+#
+	JanesTheta1 = tmp$estimates$Theta.emp#
+#
+	JanesTheta1#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	JanesTheta0 = tmp$estimates$Theta.emp#
+	JanesTheta0#
+#
+	DRtheta0s[thismc] = DRapproachTheta0;#
+	DRtheta1s[thismc] = DRapproachTheta1;#
+	HJtheta0s[thismc] = JanesTheta0; #
+	HJtheta1s[thismc] = JanesTheta1;#
+}#
+#
+write.table(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),file="sim2segments.txt")
+cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s)
+getwd()
+apply(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),mean,2)
+help(apply)
+apply(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),margin=2,FUN=mean)
+apply(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),MARGIN=2,FUN=mean)
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+myn = 800;#
+MCRUNS = 100;#
+#
+mycuts = c(0, 0.5, 1)#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+#
+DRtheta0s = rep(NA,MCRUNS)#
+DRtheta1s = rep(NA,MCRUNS)#
+HJtheta0s = rep(NA,MCRUNS)#
+HJtheta1s = rep(NA,MCRUNS)#
+#
+for (thismc in 1:MCRUNS)  {#
+	for (i in 1:(myn/4)) {#
+		thisCM1multinom = mycM1grps[,i];#
+		myxcM1s[i] = t(thisCM1multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+		thisTM1multinom = mytM1grps[,i];#
+		myxtM1s[i] = t(thisTM1multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+		thisCM0multinom = mycM0grps[,i];#
+		myxcM0s[i] = t(thisCM0multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+		thisTM0multinom = mytM0grps[,i];#
+		myxtM0s[i] = t(thisTM0multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+	}#
+	summary(myxcM1s)#
+	summary(myxtM1s)#
+	summary(myxcM0s)#
+	summary(myxtM0s)#
+#
+	myxcs = c(myxcM0s,myxcM1s);#
+	myxts = c(myxtM0s,myxtM1s);#
+	mymarginal = c(myxcs,myxts)#
+#
+	mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	# DENSITY RATIO ESTIMATION#
+#
+	# install.packages("densratio")#
+	library(densratio)#
+	densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+	densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+	new_x = seq(from=0,to=1,by = 0.001)#
+#
+	w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+	w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+	par(mfrow=c(1,2))#
+#
+	plot(new_x, w_hat1, pch=19, main=thismethod)#
+	plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+	densratio_obj1#
+#
+	densratio_obj3#
+	hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+	hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+	hat_pi_c#
+	hat_pi_t#
+	hat_gsubc = w_hat1 * hat_pi_c;#
+	hat_gsubt = w_hat3 * hat_pi_t;#
+	# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+	theta0vec = rep(NA,length(w_hat1));#
+	theta1vec = rep(NA,length(w_hat1));#
+#
+	for (i in 1:length(w_hat1)) {#
+		thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+		theta0vec[i] = thismax - hat_gsubc[i];#
+		theta1vec[i] = thismax - hat_gsubt[i];#
+	}#
+#
+	DRapproachTheta0 = mean(theta0vec)#
+	seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+	DRapproachTheta1 = mean(theta1vec)#
+	seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+	DRapproachTheta0#
+	seDRapproachTheta0#
+#
+	DRapproachTheta1#
+	seDRapproachTheta1#
+	# ESTIMATE THETA0 AND THETA1 WITH JANES TREATMENTSELECTION PACKAGE#
+#
+	library(TreatmentSelection)#
+#
+	myoutcomes = c(rep(1,length(myxcM1s)),rep(0,length(myxcM0s)),rep(1,length(myxtM1s)),rep(0,length(myxtM0s)));#
+	mymarker = c(myxcM1s,myxcM0s,myxtM1s,myxtM0s);#
+	mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	mytrtsel#
+#
+	tmp#
+#
+	JanesTheta1 = tmp$estimates$Theta.emp#
+#
+	JanesTheta1#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	JanesTheta0 = tmp$estimates$Theta.emp#
+	JanesTheta0#
+#
+	DRtheta0s[thismc] = DRapproachTheta0;#
+	DRtheta1s[thismc] = DRapproachTheta1;#
+	HJtheta0s[thismc] = JanesTheta0; #
+	HJtheta1s[thismc] = JanesTheta1;#
+}#
+#
+write.table(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),file="sim2segments.txt")
+ls()
+mean(DRtheta0s)
+median(DRtheta0s)
+plot(DRtheta0s)
+getwd()
+x <- read.table("/Users/kevindobbin/Desktop/git/DensityRatio/Programs/sim2segmentsn4kcut0pt5ht1pt8pt2ulsif.txt")
+apply(x,2,mean)
+apply(x,2,var)
+mysem = function(x) sqrt(var(x)/length(x))
+apply(x,2,sem)
+apply(x,2,m ysem)
+apply(x,2,mysem)
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+myn = 800;#
+MCRUNS = 10;#
+#
+mycuts = c(0, 0.33, 0.67, 1)#
+myalphasubcM1s = c(0.2,1.8,0.2)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2,1.8)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+#
+DRtheta0s = rep(NA,MCRUNS)#
+DRtheta1s = rep(NA,MCRUNS)#
+HJtheta0s = rep(NA,MCRUNS)#
+HJtheta1s = rep(NA,MCRUNS)#
+#
+for (thismc in 1:MCRUNS)  {#
+	for (i in 1:(myn/4)) {#
+		thisCM1multinom = mycM1grps[,i];#
+		myxcM1s[i] = t(thisCM1multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+		thisTM1multinom = mytM1grps[,i];#
+		myxtM1s[i] = t(thisTM1multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+		thisCM0multinom = mycM0grps[,i];#
+		myxcM0s[i] = t(thisCM0multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+		thisTM0multinom = mytM0grps[,i];#
+		myxtM0s[i] = t(thisTM0multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+	}#
+	summary(myxcM1s)#
+	summary(myxtM1s)#
+	summary(myxcM0s)#
+	summary(myxtM0s)#
+#
+	myxcs = c(myxcM0s,myxcM1s);#
+	myxts = c(myxtM0s,myxtM1s);#
+	mymarginal = c(myxcs,myxts)#
+#
+	mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	# DENSITY RATIO ESTIMATION#
+#
+	# install.packages("densratio")#
+	library(densratio)#
+	densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+	densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+	new_x = seq(from=0,to=1,by = 0.001)#
+#
+	w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+	w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+	par(mfrow=c(1,2))#
+#
+	plot(new_x, w_hat1, pch=19, main=thismethod)#
+	plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+	densratio_obj1#
+#
+	densratio_obj3#
+	hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+	hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+	hat_pi_c#
+	hat_pi_t#
+	hat_gsubc = w_hat1 * hat_pi_c;#
+	hat_gsubt = w_hat3 * hat_pi_t;#
+	# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+	theta0vec = rep(NA,length(w_hat1));#
+	theta1vec = rep(NA,length(w_hat1));#
+#
+	for (i in 1:length(w_hat1)) {#
+		thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+		theta0vec[i] = thismax - hat_gsubc[i];#
+		theta1vec[i] = thismax - hat_gsubt[i];#
+	}#
+#
+	DRapproachTheta0 = mean(theta0vec)#
+	seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+	DRapproachTheta1 = mean(theta1vec)#
+	seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+	DRapproachTheta0#
+	seDRapproachTheta0#
+#
+	DRapproachTheta1#
+	seDRapproachTheta1#
+	# ESTIMATE THETA0 AND THETA1 WITH JANES TREATMENTSELECTION PACKAGE#
+#
+	library(TreatmentSelection)#
+#
+	myoutcomes = c(rep(1,length(myxcM1s)),rep(0,length(myxcM0s)),rep(1,length(myxtM1s)),rep(0,length(myxtM0s)));#
+	mymarker = c(myxcM1s,myxcM0s,myxtM1s,myxtM0s);#
+	mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	mytrtsel#
+#
+	tmp#
+#
+	JanesTheta1 = tmp$estimates$Theta.emp#
+#
+	JanesTheta1#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	JanesTheta0 = tmp$estimates$Theta.emp#
+	JanesTheta0#
+#
+	DRtheta0s[thismc] = DRapproachTheta0;#
+	DRtheta1s[thismc] = DRapproachTheta1;#
+	HJtheta0s[thismc] = JanesTheta0; #
+	HJtheta1s[thismc] = JanesTheta1;#
+}#
+#
+write.table(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),file="sim3segments.txt")
+mycM1probs
+sum( ycM1probs)
+sum( mycM1probs)
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+myn = 800;#
+MCRUNS = 10;#
+#
+mycuts = c(0, 0.25, 0.75, 1)#
+myalphasubcM1s = c(0.2,1.8,0.2)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2,1.8)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+myn = 800;#
+MCRUNS = 10;#
+#
+mycuts = c(0, 0.25, 0.75, 1)#
+myalphasubcM1s = c(0.2,1.8,0.2)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2,1.8)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+#
+DRtheta0s = rep(NA,MCRUNS)#
+DRtheta1s = rep(NA,MCRUNS)#
+HJtheta0s = rep(NA,MCRUNS)#
+HJtheta1s = rep(NA,MCRUNS)#
+#
+for (thismc in 1:MCRUNS)  {#
+	for (i in 1:(myn/4)) {#
+		thisCM1multinom = mycM1grps[,i];#
+		myxcM1s[i] = t(thisCM1multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+		thisTM1multinom = mytM1grps[,i];#
+		myxtM1s[i] = t(thisTM1multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+		thisCM0multinom = mycM0grps[,i];#
+		myxcM0s[i] = t(thisCM0multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+		thisTM0multinom = mytM0grps[,i];#
+		myxtM0s[i] = t(thisTM0multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]));#
+#
+	}#
+	summary(myxcM1s)#
+	summary(myxtM1s)#
+	summary(myxcM0s)#
+	summary(myxtM0s)#
+#
+	myxcs = c(myxcM0s,myxcM1s);#
+	myxts = c(myxtM0s,myxtM1s);#
+	mymarginal = c(myxcs,myxts)#
+#
+	mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	# DENSITY RATIO ESTIMATION#
+#
+	# install.packages("densratio")#
+	library(densratio)#
+	densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+	densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+	new_x = seq(from=0,to=1,by = 0.001)#
+#
+	w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+	w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+	par(mfrow=c(1,2))#
+#
+	plot(new_x, w_hat1, pch=19, main=thismethod)#
+	plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+	densratio_obj1#
+#
+	densratio_obj3#
+	hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+	hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+	hat_pi_c#
+	hat_pi_t#
+	hat_gsubc = w_hat1 * hat_pi_c;#
+	hat_gsubt = w_hat3 * hat_pi_t;#
+	# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+	theta0vec = rep(NA,length(w_hat1));#
+	theta1vec = rep(NA,length(w_hat1));#
+#
+	for (i in 1:length(w_hat1)) {#
+		thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+		theta0vec[i] = thismax - hat_gsubc[i];#
+		theta1vec[i] = thismax - hat_gsubt[i];#
+	}#
+#
+	DRapproachTheta0 = mean(theta0vec)#
+	seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+	DRapproachTheta1 = mean(theta1vec)#
+	seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+	DRapproachTheta0#
+	seDRapproachTheta0#
+#
+	DRapproachTheta1#
+	seDRapproachTheta1#
+	# ESTIMATE THETA0 AND THETA1 WITH JANES TREATMENTSELECTION PACKAGE#
+#
+	library(TreatmentSelection)#
+#
+	myoutcomes = c(rep(1,length(myxcM1s)),rep(0,length(myxcM0s)),rep(1,length(myxtM1s)),rep(0,length(myxtM0s)));#
+	mymarker = c(myxcM1s,myxcM0s,myxtM1s,myxtM0s);#
+	mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	mytrtsel#
+#
+	tmp#
+#
+	JanesTheta1 = tmp$estimates$Theta.emp#
+#
+	JanesTheta1#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	JanesTheta0 = tmp$estimates$Theta.emp#
+	JanesTheta0#
+#
+	DRtheta0s[thismc] = DRapproachTheta0;#
+	DRtheta1s[thismc] = DRapproachTheta1;#
+	HJtheta0s[thismc] = JanesTheta0; #
+	HJtheta1s[thismc] = JanesTheta1;#
+}#
+#
+write.table(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),file="sim2segments.txt")
+dim(mycM1grps)
+length(mycuts)
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+myn = 800;#
+MCRUNS = 10;#
+#
+mycuts = c(0, 0.25, 0.75, 1)#
+myalphasubcM1s = c(0.2,1.8,0.2)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2,1.8)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+#
+DRtheta0s = rep(NA,MCRUNS)#
+DRtheta1s = rep(NA,MCRUNS)#
+HJtheta0s = rep(NA,MCRUNS)#
+HJtheta1s = rep(NA,MCRUNS)#
+for (thismc in 1:MCRUNS)  {#
+	for (i in 1:(myn/4)) {#
+		thisCM1multinom = mycM1grps[,i];#
+		myxcM1s[i] = t(thisCM1multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]),#
+		  runif(1,min=mycuts[3],max=mycuts[4]));#
+		thisTM1multinom = mytM1grps[,i];#
+		myxtM1s[i] = t(thisTM1multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]),#
+		  runif(1,min=mycuts[3],max=mycuts[4]));#
+		thisCM0multinom = mycM0grps[,i];#
+		myxcM0s[i] = t(thisCM0multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]),#
+		  runif(1,min=mycuts[3],max=mycuts[4]));#
+		thisTM0multinom = mytM0grps[,i];#
+		myxtM0s[i] = t(thisTM0multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]),#
+		  runif(1,min=mycuts[3],max=mycuts[4]));#
+#
+	}#
+	summary(myxcM1s)#
+	summary(myxtM1s)#
+	summary(myxcM0s)#
+	summary(myxtM0s)#
+#
+	myxcs = c(myxcM0s,myxcM1s);#
+	myxts = c(myxtM0s,myxtM1s);#
+	mymarginal = c(myxcs,myxts)#
+#
+	mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	# DENSITY RATIO ESTIMATION#
+#
+	# install.packages("densratio")#
+	library(densratio)#
+	densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+	densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+	new_x = seq(from=0,to=1,by = 0.001)#
+#
+	w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+	w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+	par(mfrow=c(1,2))#
+#
+	plot(new_x, w_hat1, pch=19, main=thismethod)#
+	plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+	densratio_obj1#
+#
+	densratio_obj3#
+	hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+	hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+	hat_pi_c#
+	hat_pi_t#
+	hat_gsubc = w_hat1 * hat_pi_c;#
+	hat_gsubt = w_hat3 * hat_pi_t;#
+	# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+	theta0vec = rep(NA,length(w_hat1));#
+	theta1vec = rep(NA,length(w_hat1));#
+#
+	for (i in 1:length(w_hat1)) {#
+		thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+		theta0vec[i] = thismax - hat_gsubc[i];#
+		theta1vec[i] = thismax - hat_gsubt[i];#
+	}#
+#
+	DRapproachTheta0 = mean(theta0vec)#
+	seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+	DRapproachTheta1 = mean(theta1vec)#
+	seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+	DRapproachTheta0#
+	seDRapproachTheta0#
+#
+	DRapproachTheta1#
+	seDRapproachTheta1#
+	# ESTIMATE THETA0 AND THETA1 WITH JANES TREATMENTSELECTION PACKAGE#
+#
+	library(TreatmentSelection)#
+#
+	myoutcomes = c(rep(1,length(myxcM1s)),rep(0,length(myxcM0s)),rep(1,length(myxtM1s)),rep(0,length(myxtM0s)));#
+	mymarker = c(myxcM1s,myxcM0s,myxtM1s,myxtM0s);#
+	mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	mytrtsel#
+#
+	tmp#
+#
+	JanesTheta1 = tmp$estimates$Theta.emp#
+#
+	JanesTheta1#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	JanesTheta0 = tmp$estimates$Theta.emp#
+	JanesTheta0#
+#
+	DRtheta0s[thismc] = DRapproachTheta0;#
+	DRtheta1s[thismc] = DRapproachTheta1;#
+	HJtheta0s[thismc] = JanesTheta0; #
+	HJtheta1s[thismc] = JanesTheta1;#
+}#
+#
+write.table(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),file="sim2segments.txt")
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+myn = 800;#
+MCRUNS = 10;#
+#
+mycuts = c(0, 0.25, 0.75, 1)#
+myalphasubcM1s = c(0.2,1.8,0.2)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2,1.8)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+#
+DRtheta0s = rep(NA,MCRUNS)#
+DRtheta1s = rep(NA,MCRUNS)#
+HJtheta0s = rep(NA,MCRUNS)#
+HJtheta1s = rep(NA,MCRUNS)#
+for (thismc in 1:MCRUNS)  {#
+	for (i in 1:(myn/4)) {#
+		thisCM1multinom = mycM1grps[,i];#
+		myxcM1s[i] = t(thisCM1multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]),#
+		  runif(1,min=mycuts[3],max=mycuts[4]));#
+		thisTM1multinom = mytM1grps[,i];#
+		myxtM1s[i] = t(thisTM1multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]),#
+		  runif(1,min=mycuts[3],max=mycuts[4]));#
+		thisCM0multinom = mycM0grps[,i];#
+		myxcM0s[i] = t(thisCM0multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]),#
+		  runif(1,min=mycuts[3],max=mycuts[4]));#
+		thisTM0multinom = mytM0grps[,i];#
+		myxtM0s[i] = t(thisTM0multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]),#
+		  runif(1,min=mycuts[3],max=mycuts[4]));#
+#
+	}#
+	summary(myxcM1s)#
+	summary(myxtM1s)#
+	summary(myxcM0s)#
+	summary(myxtM0s)#
+#
+	myxcs = c(myxcM0s,myxcM1s);#
+	myxts = c(myxtM0s,myxtM1s);#
+	myxmarginal = c(myxcs,myxts)#
+#
+	mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	# DENSITY RATIO ESTIMATION#
+#
+	# install.packages("densratio")#
+	library(densratio)#
+	densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+	densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+	new_x = seq(from=0,to=1,by = 0.001)#
+#
+	w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+	w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+	par(mfrow=c(1,2))#
+#
+	plot(new_x, w_hat1, pch=19, main=thismethod)#
+	plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+	densratio_obj1#
+#
+	densratio_obj3#
+	hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+	hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+	hat_pi_c#
+	hat_pi_t#
+	hat_gsubc = w_hat1 * hat_pi_c;#
+	hat_gsubt = w_hat3 * hat_pi_t;#
+	# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+	theta0vec = rep(NA,length(w_hat1));#
+	theta1vec = rep(NA,length(w_hat1));#
+#
+	for (i in 1:length(w_hat1)) {#
+		thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+		theta0vec[i] = thismax - hat_gsubc[i];#
+		theta1vec[i] = thismax - hat_gsubt[i];#
+	}#
+#
+	DRapproachTheta0 = mean(theta0vec)#
+	seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+	DRapproachTheta1 = mean(theta1vec)#
+	seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+	DRapproachTheta0#
+	seDRapproachTheta0#
+#
+	DRapproachTheta1#
+	seDRapproachTheta1#
+	# ESTIMATE THETA0 AND THETA1 WITH JANES TREATMENTSELECTION PACKAGE#
+#
+	library(TreatmentSelection)#
+#
+	myoutcomes = c(rep(1,length(myxcM1s)),rep(0,length(myxcM0s)),rep(1,length(myxtM1s)),rep(0,length(myxtM0s)));#
+	mymarker = c(myxcM1s,myxcM0s,myxtM1s,myxtM0s);#
+	mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	mytrtsel#
+#
+	tmp#
+#
+	JanesTheta1 = tmp$estimates$Theta.emp#
+#
+	JanesTheta1#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	JanesTheta0 = tmp$estimates$Theta.emp#
+	JanesTheta0#
+#
+	DRtheta0s[thismc] = DRapproachTheta0;#
+	DRtheta1s[thismc] = DRapproachTheta1;#
+	HJtheta0s[thismc] = JanesTheta0; #
+	HJtheta1s[thismc] = JanesTheta1;#
+}#
+#
+write.table(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),file="sim2segments.txt")
+DRtheta0s
+HJtheta0s
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+myn = 800;#
+MCRUNS = 100;#
+#
+mycuts = c(0, 0.25, 0.75, 1)#
+myalphasubcM1s = c(0.2,1.8,0.2)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2,1.8)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+#
+DRtheta0s = rep(NA,MCRUNS)#
+DRtheta1s = rep(NA,MCRUNS)#
+HJtheta0s = rep(NA,MCRUNS)#
+HJtheta1s = rep(NA,MCRUNS)#
+for (thismc in 1:MCRUNS)  {#
+	for (i in 1:(myn/4)) {#
+		thisCM1multinom = mycM1grps[,i];#
+		myxcM1s[i] = t(thisCM1multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]),#
+		  runif(1,min=mycuts[3],max=mycuts[4]));#
+		thisTM1multinom = mytM1grps[,i];#
+		myxtM1s[i] = t(thisTM1multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]),#
+		  runif(1,min=mycuts[3],max=mycuts[4]));#
+		thisCM0multinom = mycM0grps[,i];#
+		myxcM0s[i] = t(thisCM0multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]),#
+		  runif(1,min=mycuts[3],max=mycuts[4]));#
+		thisTM0multinom = mytM0grps[,i];#
+		myxtM0s[i] = t(thisTM0multinom) %*% #
+		c(runif(1,min=mycuts[1],max=mycuts[2]),#
+		  runif(1,min=mycuts[2],max=mycuts[3]),#
+		  runif(1,min=mycuts[3],max=mycuts[4]));#
+#
+	}#
+	summary(myxcM1s)#
+	summary(myxtM1s)#
+	summary(myxcM0s)#
+	summary(myxtM0s)#
+#
+	myxcs = c(myxcM0s,myxcM1s);#
+	myxts = c(myxtM0s,myxtM1s);#
+	myxmarginal = c(myxcs,myxts)#
+#
+	mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	# DENSITY RATIO ESTIMATION#
+#
+	# install.packages("densratio")#
+	library(densratio)#
+	densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+	densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+	new_x = seq(from=0,to=1,by = 0.001)#
+#
+	w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+	w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+	par(mfrow=c(1,2))#
+#
+	plot(new_x, w_hat1, pch=19, main=thismethod)#
+	plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+	densratio_obj1#
+#
+	densratio_obj3#
+	hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+	hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+	hat_pi_c#
+	hat_pi_t#
+	hat_gsubc = w_hat1 * hat_pi_c;#
+	hat_gsubt = w_hat3 * hat_pi_t;#
+	# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+	theta0vec = rep(NA,length(w_hat1));#
+	theta1vec = rep(NA,length(w_hat1));#
+#
+	for (i in 1:length(w_hat1)) {#
+		thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+		theta0vec[i] = thismax - hat_gsubc[i];#
+		theta1vec[i] = thismax - hat_gsubt[i];#
+	}#
+#
+	DRapproachTheta0 = mean(theta0vec)#
+	seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+	DRapproachTheta1 = mean(theta1vec)#
+	seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+	DRapproachTheta0#
+	seDRapproachTheta0#
+#
+	DRapproachTheta1#
+	seDRapproachTheta1#
+	# ESTIMATE THETA0 AND THETA1 WITH JANES TREATMENTSELECTION PACKAGE#
+#
+	library(TreatmentSelection)#
+#
+	myoutcomes = c(rep(1,length(myxcM1s)),rep(0,length(myxcM0s)),rep(1,length(myxtM1s)),rep(0,length(myxtM0s)));#
+	mymarker = c(myxcM1s,myxcM0s,myxtM1s,myxtM0s);#
+	mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	mytrtsel#
+#
+	tmp#
+#
+	JanesTheta1 = tmp$estimates$Theta.emp#
+#
+	JanesTheta1#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	JanesTheta0 = tmp$estimates$Theta.emp#
+	JanesTheta0#
+#
+	DRtheta0s[thismc] = DRapproachTheta0;#
+	DRtheta1s[thismc] = DRapproachTheta1;#
+	HJtheta0s[thismc] = JanesTheta0; #
+	HJtheta1s[thismc] = JanesTheta1;#
+}#
+#
+write.table(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),file="sim2segments.txt")
+apply(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),2,mean)
+apply(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),2,mysem)
+apply(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),2,myse)
+ls()
+mysem = function(x) { sqrt(var(x)/length(x))}
+apply(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),2,mean)
+apply(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),2,mysem)
+q()
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+myn = 800;#
+MCRUNS = 500;#
+#
+mycuts = c(0, 0.25, 0.75, 1)#
+myalphasubcM1s = c(0.2,1.8,0.2)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2,1.8)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+DRtheta0s = rep(NA,MCRUNS)#
+DRtheta1s = rep(NA,MCRUNS)#
+HJtheta0s = rep(NA,MCRUNS)#
+HJtheta1s = rep(NA,MCRUNS)#
+#
+generateCM1rnvs = function(numberneeded) {#
+	myreturn = rep(NA, numberneeded);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA);#
+		thismultinom = rmultinom(1,1,mycM1probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- runif(1,min=mycuts[1],max=mycuts[2]) }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- runif(1,min=mycuts[2],max=mycuts[3]) }#
+		if (as.vector(thismultinom)[3] == 1 ) { myx <- runif(1,min=mycuts[3],max=mycuts[4]) }#
+		myreturn[i] = myx;#
+	}#
+	myreturn;#
+}#
+#
+generateTM1rnvs = function(numberneeded) {#
+	myreturn = rep(NA, numberneeded);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA);#
+		thismultinom = rmultinom(1,1,mytM1probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- runif(1,min=mycuts[1],max=mycuts[2]) }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- runif(1,min=mycuts[2],max=mycuts[3]) }#
+		if (as.vector(thismultinom)[3] == 1 ) { myx <- runif(1,min=mycuts[3],max=mycuts[4]) }#
+		myreturn[i] = myx;#
+	}#
+	myreturn;#
+}#
+#
+generateCM0rnvs = function(numberneeded) {#
+	myreturn = rep(NA, numberneeded);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA);#
+		thismultinom = rmultinom(1,1,mycM0probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- runif(1,min=mycuts[1],max=mycuts[2]) }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- runif(1,min=mycuts[2],max=mycuts[3]) }#
+		if (as.vector(thismultinom)[3] == 1 ) { myx <- runif(1,min=mycuts[3],max=mycuts[4]) }#
+		myreturn[i] = myx;#
+	}#
+	myreturn;#
+}#
+generateTM0rnvs = function(numberneeded) {#
+	myreturn = rep(NA, numberneeded);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA);#
+		thismultinom = rmultinom(1,1,mytM0probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- runif(1,min=mycuts[1],max=mycuts[2]) }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- runif(1,min=mycuts[2],max=mycuts[3]) }#
+		if (as.vector(thismultinom)[3] == 1 ) { myx <- runif(1,min=mycuts[3],max=mycuts[4]) }#
+		myreturn[i] = myx;#
+	}#
+	myreturn;#
+}#
+for (thismc in 1:MCRUNS)  {#
+    mytrt1ctrl0 = rbinom(myn,1,0.5);  # indicates randomization to trt/ctrl#
+    myM1is1M0is0 = rbinom(myn,1,0.5); # the conditional probabilities of M1 and M0 are 0.5 for both trt and control#
+#
+    NumberOfCM1 = length(intersect(which(mytrt1ctrl0==0),which(myM1is1M0is0==1)))#
+    NumberOfTM1 = length(intersect(which(mytrt1ctrl0==1),which(myM1is1M0is0==1)))#
+    NumberOfCM0 = length(intersect(which(mytrt1ctrl0==0),which(myM1is1M0is0==0)))#
+    NumberOfTM0 = length(intersect(which(mytrt1ctrl0==1),which(myM1is1M0is0==0)))#
+#
+    myxcM1s = generateCM1rnvs(NumberOfCM1)#
+    myxtM1s = generateTM1rnvs(NumberOfTM1)#
+    myxcM0s = generateCM0rnvs(NumberOfCM0)#
+    myxtM0s = generateTM0rnvs(NumberOfTM0)#
+#
+	summary(myxcM1s)#
+	summary(myxtM1s)#
+	summary(myxcM0s)#
+	summary(myxtM0s)#
+#
+	myxcs = c(myxcM0s,myxcM1s);#
+	myxts = c(myxtM0s,myxtM1s);#
+	myxmarginal = c(myxcs,myxts)#
+#
+	mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	# DENSITY RATIO ESTIMATION#
+#
+	# install.packages("densratio")#
+	library(densratio)#
+	densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+	densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+	new_x = seq(from=0,to=1,by = 0.001)#
+#
+	w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+	w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+	par(mfrow=c(1,2))#
+#
+	plot(new_x, w_hat1, pch=19, main=thismethod)#
+	plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+	densratio_obj1#
+#
+	densratio_obj3#
+	hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+	hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+	hat_pi_c#
+	hat_pi_t#
+	hat_gsubc = w_hat1 * hat_pi_c;#
+	hat_gsubt = w_hat3 * hat_pi_t;#
+	# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+	theta0vec = rep(NA,length(w_hat1));#
+	theta1vec = rep(NA,length(w_hat1));#
+#
+	for (i in 1:length(w_hat1)) {#
+		thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+		theta0vec[i] = thismax - hat_gsubc[i];#
+		theta1vec[i] = thismax - hat_gsubt[i];#
+	}#
+#
+	DRapproachTheta0 = mean(theta0vec)#
+	seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+	DRapproachTheta1 = mean(theta1vec)#
+	seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+	DRapproachTheta0#
+	seDRapproachTheta0#
+#
+	DRapproachTheta1#
+	seDRapproachTheta1#
+	# ESTIMATE THETA0 AND THETA1 WITH JANES TREATMENTSELECTION PACKAGE#
+#
+	library(TreatmentSelection)#
+#
+	myoutcomes = c(rep(1,length(myxcM1s)),rep(0,length(myxcM0s)),rep(1,length(myxtM1s)),rep(0,length(myxtM0s)));#
+	mymarker = c(myxcM1s,myxcM0s,myxtM1s,myxtM0s);#
+	mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	mytrtsel#
+#
+	tmp#
+#
+	JanesTheta1 = tmp$estimates$Theta.emp#
+#
+	JanesTheta1#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	JanesTheta0 = tmp$estimates$Theta.emp#
+	JanesTheta0#
+#
+	DRtheta0s[thismc] = DRapproachTheta0;#
+	DRtheta1s[thismc] = DRapproachTheta1;#
+	HJtheta0s[thismc] = JanesTheta0; #
+	HJtheta1s[thismc] = JanesTheta1;#
+}#
+#
+write.table(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),file="sim2segments.txt")
+getwd()
+\
+exit
+q()
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+myn = 800;#
+MCRUNS = 500;#
+#
+mycuts = c(0, 0.5, 1)#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaselengths = rep(NA,length(mycuts)-1)#
+for (i in 1:length(mybaselengths)) {#
+	mybaselengths[i] = mycuts[i+1]-mycuts[i];#
+}#
+#
+mycM1probs = myalphasubcM1s*mybaselengths;#
+mycM0probs = myalphasubcM0s*mybaselengths;#
+mytM1probs = myalphasubtM1s*mybaselengths;#
+mytM0probs = myalphasubtM0s*mybaselengths;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+DRtheta0s = rep(NA,MCRUNS)#
+DRtheta1s = rep(NA,MCRUNS)#
+HJtheta0s = rep(NA,MCRUNS)#
+HJtheta1s = rep(NA,MCRUNS)#
+#
+generateCM1rnvs = function(numberneeded) {#
+	myreturn = rep(NA, numberneeded);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA);#
+		thismultinom = rmultinom(1,1,mycM1probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- runif(1,min=mycuts[1],max=mycuts[2]) }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- runif(1,min=mycuts[2],max=mycuts[3]) }#
+		myreturn[i] = myx;#
+	}#
+	myreturn;#
+}#
+#
+generateTM1rnvs = function(numberneeded) {#
+	myreturn = rep(NA, numberneeded);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA);#
+		thismultinom = rmultinom(1,1,mytM1probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- runif(1,min=mycuts[1],max=mycuts[2]) }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- runif(1,min=mycuts[2],max=mycuts[3]) }#
+		myreturn[i] = myx;#
+	}#
+	myreturn;#
+}#
+#
+generateCM0rnvs = function(numberneeded) {#
+	myreturn = rep(NA, numberneeded);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA);#
+		thismultinom = rmultinom(1,1,mycM0probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- runif(1,min=mycuts[1],max=mycuts[2]) }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- runif(1,min=mycuts[2],max=mycuts[3]) }#
+		myreturn[i] = myx;#
+	}#
+	myreturn;#
+}#
+generateTM0rnvs = function(numberneeded) {#
+	myreturn = rep(NA, numberneeded);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA);#
+		thismultinom = rmultinom(1,1,mytM0probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- runif(1,min=mycuts[1],max=mycuts[2]) }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- runif(1,min=mycuts[2],max=mycuts[3]) }#
+		myreturn[i] = myx;#
+	}#
+	myreturn;#
+}#
+for (thismc in 1:MCRUNS)  {#
+    mytrt1ctrl0 = rbinom(myn,1,0.5);  # indicates randomization to trt/ctrl#
+    myM1is1M0is0 = rbinom(myn,1,0.5); # the conditional probabilities of M1 and M0 are 0.5 for both trt and control#
+#
+    NumberOfCM1 = length(intersect(which(mytrt1ctrl0==0),which(myM1is1M0is0==1)))#
+    NumberOfTM1 = length(intersect(which(mytrt1ctrl0==1),which(myM1is1M0is0==1)))#
+    NumberOfCM0 = length(intersect(which(mytrt1ctrl0==0),which(myM1is1M0is0==0)))#
+    NumberOfTM0 = length(intersect(which(mytrt1ctrl0==1),which(myM1is1M0is0==0)))#
+#
+    myxcM1s = generateCM1rnvs(NumberOfCM1)#
+    myxtM1s = generateTM1rnvs(NumberOfTM1)#
+    myxcM0s = generateCM0rnvs(NumberOfCM0)#
+    myxtM0s = generateTM0rnvs(NumberOfTM0)#
+#
+	summary(myxcM1s)#
+	summary(myxtM1s)#
+	summary(myxcM0s)#
+	summary(myxtM0s)#
+#
+	myxcs = c(myxcM0s,myxcM1s);#
+	myxts = c(myxtM0s,myxtM1s);#
+	myxmarginal = c(myxcs,myxts)#
+#
+	mycMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	mytMresp = c(rep(0,myn/4),rep(1,myn/4)) #
+	# DENSITY RATIO ESTIMATION#
+#
+	# install.packages("densratio")#
+	library(densratio)#
+	densratio_obj1 = densratio(rep(myxcM1s,4),myxmarginal,method=thismethod)#
+	densratio_obj3 = densratio(rep(myxtM1s,4),myxmarginal,method=thismethod)#
+#
+	new_x = seq(from=0,to=1,by = 0.001)#
+#
+	w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+	w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+	par(mfrow=c(1,2))#
+#
+	plot(new_x, w_hat1, pch=19, main=thismethod)#
+	plot(new_x, w_hat3, pch=19, main=thismethod)#
+#
+	densratio_obj1#
+#
+	densratio_obj3#
+	hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+	hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+	hat_pi_c#
+	hat_pi_t#
+	hat_gsubc = w_hat1 * hat_pi_c;#
+	hat_gsubt = w_hat3 * hat_pi_t;#
+	# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+	theta0vec = rep(NA,length(w_hat1));#
+	theta1vec = rep(NA,length(w_hat1));#
+#
+	for (i in 1:length(w_hat1)) {#
+		thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+		theta0vec[i] = thismax - hat_gsubc[i];#
+		theta1vec[i] = thismax - hat_gsubt[i];#
+	}#
+#
+	DRapproachTheta0 = mean(theta0vec)#
+	seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+	DRapproachTheta1 = mean(theta1vec)#
+	seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+	DRapproachTheta0#
+	seDRapproachTheta0#
+#
+	DRapproachTheta1#
+	seDRapproachTheta1#
+	# ESTIMATE THETA0 AND THETA1 WITH JANES TREATMENTSELECTION PACKAGE#
+#
+	library(TreatmentSelection)#
+#
+	myoutcomes = c(rep(1,length(myxcM1s)),rep(0,length(myxcM0s)),rep(1,length(myxtM1s)),rep(0,length(myxtM0s)));#
+	mymarker = c(myxcM1s,myxcM0s,myxtM1s,myxtM0s);#
+	mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	mytrtsel#
+#
+	tmp#
+#
+	JanesTheta1 = tmp$estimates$Theta.emp#
+#
+	JanesTheta1#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	JanesTheta0 = tmp$estimates$Theta.emp#
+	JanesTheta0#
+#
+	DRtheta0s[thismc] = DRapproachTheta0;#
+	DRtheta1s[thismc] = DRapproachTheta1;#
+	HJtheta0s[thismc] = JanesTheta0; #
+	HJtheta1s[thismc] = JanesTheta1;#
+}#
+#
+write.table(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),file="simreal2segments.txt")
+q()
+ls()
+save.image()
+ls()
+q()
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+myn = 800;#
+MCRUNS = 5;#
+#
+myregion = function(x1,x2) {#
+	myreturn = -1;#
+	if (x1+x2<1) { myreturn = 1; }#
+	else { myreturn = 2; }#
+}#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaseareas = c(0.5,0.5)#
+#
+mycM1probs = myalphasubcM1s*mybaseareas;#
+mycM0probs = myalphasubcM0s*mybaseareas;#
+mytM1probs = myalphasubtM1s*mybaseareas;#
+mytM0probs = myalphasubtM0s*mybaseareas;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+#
+DRtheta0s = rep(NA,MCRUNS)#
+DRtheta1s = rep(NA,MCRUNS)#
+HJtheta0s = rep(NA,MCRUNS)#
+HJtheta1s = rep(NA,MCRUNS)#
+mygeneratefromArea1 = function() {#
+	xtry = c(runif(1),runif(1));#
+	while (sum(xtry) > 1) { xtry = c(runif(1),runif(1))  }#
+	return(xtry);#
+}#
+mygeneratefromArea2 = function() {#
+	xtry = c(runif(1),runif(1));#
+	while (sum(xtry) < 1) { xtry = c(runif(1),runif(1))  }#
+	return(xtry);#
+}#
+# RETURN A 2 BY N MATRIX OF BIOMARKER VALUES#
+generateCM1rnvs = function(numberneeded) {#
+	myreturn = matrix(rep(NA, 2*numberneeded),nrow=2);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA,NA);#
+		thismultinom = rmultinom(1,1,mycM1probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- mygeneratefromArea1() }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- mygeneratefromArea2() }#
+		myreturn[,i] = myx;#
+	}#
+	myreturn;#
+}#
+#
+generateTM1rnvs = function(numberneeded) {#
+	myreturn = matrix(rep(NA, 2*numberneeded),nrow=2);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA,NA);#
+		thismultinom = rmultinom(1,1,mytM1probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- mygeneratefromArea1() }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- mygeneratefromArea2() }#
+		myreturn[,i] = myx;#
+	}#
+	myreturn;#
+}#
+#
+generateCM0rnvs = function(numberneeded) {#
+	myreturn = matrix(rep(NA, 2*numberneeded),nrow=2);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA,NA);#
+		thismultinom = rmultinom(1,1,mycM0probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- mygeneratefromArea1() }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- mygeneratefromArea2() }#
+		myreturn[,i] = myx;#
+	}#
+	myreturn;#
+}#
+generateTM0rnvs = function(numberneeded) {#
+	myreturn = matrix(rep(NA, 2*numberneeded),nrow=2);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA,NA);#
+		thismultinom = rmultinom(1,1,mytM0probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- mygeneratefromArea1() }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- mygeneratefromArea2() }#
+		myreturn[,i] = myx;#
+	}#
+	myreturn;#
+}#
+for (thismc in 1:MCRUNS)  {#
+    mytrt1ctrl0 = rbinom(myn,1,0.5);  # indicates randomization to trt/ctrl#
+    myM1is1M0is0 = rbinom(myn,1,0.5); # the conditional probabilities of M1 and M0 are 0.5 for both trt and control#
+#
+    NumberOfCM1 = length(intersect(which(mytrt1ctrl0==0),which(myM1is1M0is0==1)))#
+    NumberOfTM1 = length(intersect(which(mytrt1ctrl0==1),which(myM1is1M0is0==1)))#
+    NumberOfCM0 = length(intersect(which(mytrt1ctrl0==0),which(myM1is1M0is0==0)))#
+    NumberOfTM0 = length(intersect(which(mytrt1ctrl0==1),which(myM1is1M0is0==0)))#
+#
+    myxcM1s = generateCM1rnvs(NumberOfCM1)#
+    myxtM1s = generateTM1rnvs(NumberOfTM1)#
+    myxcM0s = generateCM0rnvs(NumberOfCM0)#
+    myxtM0s = generateTM0rnvs(NumberOfTM0)#
+#
+	apply(myxcM1s,1,mean)#
+	apply(myxtM1s,1,mean)#
+	apply(myxcM0s,1,mean)#
+	apply(myxtM0s,1,mean)#
+	myxcs = cbind(myxcM0s,myxcM1s);#
+	myxts = cbind(myxtM0s,myxtM1s);#
+	myxmarginal = cbind(myxcs,myxts)#
+#
+	mycMresp = c(rep(0,NumberOfCM0),rep(1,NumberOfCM1)) #
+	mytMresp = c(rep(0,NumberOfTM0),rep(1,NumberOfTM1)) #
+	# DENSITY RATIO ESTIMATION#
+#
+	install.packages("densratio")#
+	library(densratio)#
+	densratio_obj1 = densratio(t(cbind(myxcM1s,myxcM1s,myxcM1s,myxcM1s)),t(myxmarginal),method=thismethod)#
+	densratio_obj3 = densratio(t(cbind(myxtM1s,myxtM1s,myxtM1s,myxtM1s)),t(myxmarginal),method=thismethod)#
+#
+	new_x = t(matrix(runif(2000),nrow=2));#
+#
+	w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+	w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+    # library(rgl)#
+    # plot3d(new_x[,1],new_x[,2],w_hat1)#
+	densratio_obj1#
+#
+	densratio_obj3#
+	hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+	hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+	hat_pi_c#
+	hat_pi_t#
+	hat_gsubc = w_hat1 * hat_pi_c;#
+	hat_gsubt = w_hat3 * hat_pi_t;#
+	# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+	theta0vec = rep(NA,length(w_hat1));#
+	theta1vec = rep(NA,length(w_hat1));#
+#
+	for (i in 1:length(w_hat1)) {#
+		thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+		theta0vec[i] = thismax - hat_gsubc[i];#
+		theta1vec[i] = thismax - hat_gsubt[i];#
+	}#
+#
+	DRapproachTheta0 = mean(theta0vec)#
+	seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+	DRapproachTheta1 = mean(theta1vec)#
+	seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+	DRapproachTheta0#
+	seDRapproachTheta0#
+#
+	DRapproachTheta1#
+	seDRapproachTheta1#
+	# ESTIMATE THETA0 AND THETA1 WITH LOGISTIC REGRESSION + JANES TREATMENTSELECTION PACKAGE#
+#
+	myx1cs = myxcs[1,];#
+	myx2cs = myxcs[2,];#
+	myx1ts = myxts[1,];#
+	myx2ts = myxts[2,];#
+	myx1All = c(myx1cs,myx1ts)#
+	myx2All = c(myx2cs,myx2ts)#
+	myresp = c(mycMresp,mytMresp)#
+	mytrtAll = c(rep(0,length(mycMresp)),rep(1,length(mytMresp)));#
+	mylogreg = glm(myresp ~ myx1All + myx2All + mytrtAll + #
+		myx1All:mytrtAll + myx2All:mytrtAll, family=binomial(link='logit'))#
+#
+    beta0c = coef(mylogreg)[1]#
+    beta0t = coef(mylogreg)[2]#
+	beta3 = coef(mylogreg)[5]#
+	beta4 = coef(mylogreg)[6]#
+	mydim1vec = beta3/sqrt(beta3^2+beta4^2);#
+	mydim2vec = beta4/sqrt(beta3^2+beta4^2);#
+    mynewxcM1s = as.vector(c(mydim1vec,mydim2vec) %*% myxcM1s) #
+    mynewxtM1s = as.vector(c(mydim1vec,mydim2vec) %*% myxtM1s)#
+    mynewxcM0s = as.vector(c(mydim1vec,mydim2vec) %*% myxcM0s)#
+    mynewxtM0s = as.vector(c(mydim1vec,mydim2vec) %*% myxtM0s)#
+    # boxplot(mynewxcM1s,mynewxtM1s,mynewxcM0s,mynewxtM0s)#
+	library(TreatmentSelection)#
+#
+	myoutcomes = c(rep(1,length(mynewxcM1s)),rep(0,length(mynewxcM0s)),rep(1,length(mynewxtM1s)),rep(0,length(mynewxtM0s)));#
+	mymarker = c(mynewxcM1s,mynewxcM0s,mynewxtM1s,mynewxtM0s);#
+	mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	mytrtsel#
+#
+	tmp#
+#
+	JanesTheta1 = tmp$estimates$Theta.emp#
+#
+	JanesTheta1#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	JanesTheta0 = tmp$estimates$Theta.emp#
+	JanesTheta0#
+#
+	DRtheta0s[thismc] = DRapproachTheta0;#
+	DRtheta1s[thismc] = DRapproachTheta1;#
+	HJtheta0s[thismc] = JanesTheta0; #
+	HJtheta1s[thismc] = JanesTheta1;#
+}#
+#
+write.table(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),file="simTriangleAreamyn3200MCRUNS100.txt")
+DRtheta0s
+DRtheta1s
+HJtheta0s
+HJtheta1s
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+myn = 800;#
+MCRUNS = 100;#
+#
+myregion = function(x1,x2) {#
+	myreturn = -1;#
+	if (x1+x2<1) { myreturn = 1; }#
+	else { myreturn = 2; }#
+}#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaseareas = c(0.5,0.5)#
+#
+mycM1probs = myalphasubcM1s*mybaseareas;#
+mycM0probs = myalphasubcM0s*mybaseareas;#
+mytM1probs = myalphasubtM1s*mybaseareas;#
+mytM0probs = myalphasubtM0s*mybaseareas;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+#
+DRtheta0s = rep(NA,MCRUNS)#
+DRtheta1s = rep(NA,MCRUNS)#
+HJtheta0s = rep(NA,MCRUNS)#
+HJtheta1s = rep(NA,MCRUNS)#
+mygeneratefromArea1 = function() {#
+	xtry = c(runif(1),runif(1));#
+	while (sum(xtry) > 1) { xtry = c(runif(1),runif(1))  }#
+	return(xtry);#
+}#
+mygeneratefromArea2 = function() {#
+	xtry = c(runif(1),runif(1));#
+	while (sum(xtry) < 1) { xtry = c(runif(1),runif(1))  }#
+	return(xtry);#
+}#
+# RETURN A 2 BY N MATRIX OF BIOMARKER VALUES#
+generateCM1rnvs = function(numberneeded) {#
+	myreturn = matrix(rep(NA, 2*numberneeded),nrow=2);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA,NA);#
+		thismultinom = rmultinom(1,1,mycM1probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- mygeneratefromArea1() }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- mygeneratefromArea2() }#
+		myreturn[,i] = myx;#
+	}#
+	myreturn;#
+}#
+#
+generateTM1rnvs = function(numberneeded) {#
+	myreturn = matrix(rep(NA, 2*numberneeded),nrow=2);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA,NA);#
+		thismultinom = rmultinom(1,1,mytM1probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- mygeneratefromArea1() }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- mygeneratefromArea2() }#
+		myreturn[,i] = myx;#
+	}#
+	myreturn;#
+}#
+#
+generateCM0rnvs = function(numberneeded) {#
+	myreturn = matrix(rep(NA, 2*numberneeded),nrow=2);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA,NA);#
+		thismultinom = rmultinom(1,1,mycM0probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- mygeneratefromArea1() }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- mygeneratefromArea2() }#
+		myreturn[,i] = myx;#
+	}#
+	myreturn;#
+}#
+generateTM0rnvs = function(numberneeded) {#
+	myreturn = matrix(rep(NA, 2*numberneeded),nrow=2);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA,NA);#
+		thismultinom = rmultinom(1,1,mytM0probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- mygeneratefromArea1() }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- mygeneratefromArea2() }#
+		myreturn[,i] = myx;#
+	}#
+	myreturn;#
+}#
+for (thismc in 1:MCRUNS)  {#
+    mytrt1ctrl0 = rbinom(myn,1,0.5);  # indicates randomization to trt/ctrl#
+    myM1is1M0is0 = rbinom(myn,1,0.5); # the conditional probabilities of M1 and M0 are 0.5 for both trt and control#
+#
+    NumberOfCM1 = length(intersect(which(mytrt1ctrl0==0),which(myM1is1M0is0==1)))#
+    NumberOfTM1 = length(intersect(which(mytrt1ctrl0==1),which(myM1is1M0is0==1)))#
+    NumberOfCM0 = length(intersect(which(mytrt1ctrl0==0),which(myM1is1M0is0==0)))#
+    NumberOfTM0 = length(intersect(which(mytrt1ctrl0==1),which(myM1is1M0is0==0)))#
+#
+    myxcM1s = generateCM1rnvs(NumberOfCM1)#
+    myxtM1s = generateTM1rnvs(NumberOfTM1)#
+    myxcM0s = generateCM0rnvs(NumberOfCM0)#
+    myxtM0s = generateTM0rnvs(NumberOfTM0)#
+#
+	apply(myxcM1s,1,mean)#
+	apply(myxtM1s,1,mean)#
+	apply(myxcM0s,1,mean)#
+	apply(myxtM0s,1,mean)#
+	myxcs = cbind(myxcM0s,myxcM1s);#
+	myxts = cbind(myxtM0s,myxtM1s);#
+	myxmarginal = cbind(myxcs,myxts)#
+#
+	mycMresp = c(rep(0,NumberOfCM0),rep(1,NumberOfCM1)) #
+	mytMresp = c(rep(0,NumberOfTM0),rep(1,NumberOfTM1)) #
+	# DENSITY RATIO ESTIMATION#
+#
+	install.packages("densratio")#
+	library(densratio)#
+	densratio_obj1 = densratio(t(cbind(myxcM1s,myxcM1s,myxcM1s,myxcM1s)),t(myxmarginal),method=thismethod)#
+	densratio_obj3 = densratio(t(cbind(myxtM1s,myxtM1s,myxtM1s,myxtM1s)),t(myxmarginal),method=thismethod)#
+#
+	new_x = t(matrix(runif(2000),nrow=2));#
+#
+	w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+	w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+    # library(rgl)#
+    # plot3d(new_x[,1],new_x[,2],w_hat1)#
+	densratio_obj1#
+#
+	densratio_obj3#
+	hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+	hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+	hat_pi_c#
+	hat_pi_t#
+	hat_gsubc = w_hat1 * hat_pi_c;#
+	hat_gsubt = w_hat3 * hat_pi_t;#
+	# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+	theta0vec = rep(NA,length(w_hat1));#
+	theta1vec = rep(NA,length(w_hat1));#
+#
+	for (i in 1:length(w_hat1)) {#
+		thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+		theta0vec[i] = thismax - hat_gsubc[i];#
+		theta1vec[i] = thismax - hat_gsubt[i];#
+	}#
+#
+	DRapproachTheta0 = mean(theta0vec)#
+	seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+	DRapproachTheta1 = mean(theta1vec)#
+	seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+	DRapproachTheta0#
+	seDRapproachTheta0#
+#
+	DRapproachTheta1#
+	seDRapproachTheta1#
+	# ESTIMATE THETA0 AND THETA1 WITH LOGISTIC REGRESSION + JANES TREATMENTSELECTION PACKAGE#
+#
+	myx1cs = myxcs[1,];#
+	myx2cs = myxcs[2,];#
+	myx1ts = myxts[1,];#
+	myx2ts = myxts[2,];#
+	myx1All = c(myx1cs,myx1ts)#
+	myx2All = c(myx2cs,myx2ts)#
+	myresp = c(mycMresp,mytMresp)#
+	mytrtAll = c(rep(0,length(mycMresp)),rep(1,length(mytMresp)));#
+	mylogreg = glm(myresp ~ myx1All + myx2All + mytrtAll + #
+		myx1All:mytrtAll + myx2All:mytrtAll, family=binomial(link='logit'))#
+#
+    beta0c = coef(mylogreg)[1]#
+    beta0t = coef(mylogreg)[2]#
+	beta3 = coef(mylogreg)[5]#
+	beta4 = coef(mylogreg)[6]#
+	mydim1vec = beta3/sqrt(beta3^2+beta4^2);#
+	mydim2vec = beta4/sqrt(beta3^2+beta4^2);#
+    mynewxcM1s = as.vector(c(mydim1vec,mydim2vec) %*% myxcM1s) #
+    mynewxtM1s = as.vector(c(mydim1vec,mydim2vec) %*% myxtM1s)#
+    mynewxcM0s = as.vector(c(mydim1vec,mydim2vec) %*% myxcM0s)#
+    mynewxtM0s = as.vector(c(mydim1vec,mydim2vec) %*% myxtM0s)#
+    # boxplot(mynewxcM1s,mynewxtM1s,mynewxcM0s,mynewxtM0s)#
+	library(TreatmentSelection)#
+#
+	myoutcomes = c(rep(1,length(mynewxcM1s)),rep(0,length(mynewxcM0s)),rep(1,length(mynewxtM1s)),rep(0,length(mynewxtM0s)));#
+	mymarker = c(mynewxcM1s,mynewxcM0s,mynewxtM1s,mynewxtM0s);#
+	mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	mytrtsel#
+#
+	tmp#
+#
+	JanesTheta1 = tmp$estimates$Theta.emp#
+#
+	JanesTheta1#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	JanesTheta0 = tmp$estimates$Theta.emp#
+	JanesTheta0#
+#
+	DRtheta0s[thismc] = DRapproachTheta0;#
+	DRtheta1s[thismc] = DRapproachTheta1;#
+	HJtheta0s[thismc] = JanesTheta0; #
+	HJtheta1s[thismc] = JanesTheta1;#
+}#
+#
+write.table(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),file="simTriangleAreamyn3200MCRUNS100.txt")
+getwd()
+myx = cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s)
+apply(myx,2,mean)
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+myn = 800;#
+MCRUNS = 100;#
+#
+myregion = function(x1,x2) {#
+	myreturn = -1;#
+	condA = (x1 < (1/3));#
+	condB = (x1 >= (1/3)) * (x1<(2/3)) * (x2<(1/2));#
+	if (condA | condB) myreturn <- 1#
+	else myreturn <- 2; #
+	myreturn;#
+}#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaseareas = c(0.5,0.5)#
+#
+mycM1probs = myalphasubcM1s*mybaseareas;#
+mycM0probs = myalphasubcM0s*mybaseareas;#
+mytM1probs = myalphasubtM1s*mybaseareas;#
+mytM0probs = myalphasubtM0s*mybaseareas;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+mycM1grps = rmultinom(myn/4,1,mycM1probs)#
+mycM0grps = rmultinom(myn/4,1,mycM0probs)#
+mytM1grps = rmultinom(myn/4,1,mytM1probs)#
+mytM0grps = rmultinom(myn/4,1,mytM0probs)#
+#
+sum(mycM1grps[1,])#
+sum(mycM0grps[1,])#
+sum(mytM1grps[1,])#
+sum(mytM0grps[1,])#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+#
+DRtheta0s = rep(NA,MCRUNS)#
+DRtheta1s = rep(NA,MCRUNS)#
+HJtheta0s = rep(NA,MCRUNS)#
+HJtheta1s = rep(NA,MCRUNS)#
+mygeneratefromArea1 = function() {#
+	xtry = c(runif(1),runif(1));#
+	while (myregion(xtry[1],xtry[2]) != 1) { xtry = c(runif(1),runif(1))  }#
+	return(xtry);#
+}#
+mygeneratefromArea2 = function() {#
+	xtry = c(runif(1),runif(1));#
+	while (myregion(xtry[1],xtry[2]) != 2) { xtry = c(runif(1),runif(1))  }#
+	return(xtry);#
+}#
+# RETURN A 2 BY N MATRIX OF BIOMARKER VALUES#
+generateCM1rnvs = function(numberneeded) {#
+	myreturn = matrix(rep(NA, 2*numberneeded),nrow=2);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA,NA);#
+		thismultinom = rmultinom(1,1,mycM1probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- mygeneratefromArea1() }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- mygeneratefromArea2() }#
+		myreturn[,i] = myx;#
+	}#
+	myreturn;#
+}#
+#
+generateTM1rnvs = function(numberneeded) {#
+	myreturn = matrix(rep(NA, 2*numberneeded),nrow=2);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA,NA);#
+		thismultinom = rmultinom(1,1,mytM1probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- mygeneratefromArea1() }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- mygeneratefromArea2() }#
+		myreturn[,i] = myx;#
+	}#
+	myreturn;#
+}#
+#
+generateCM0rnvs = function(numberneeded) {#
+	myreturn = matrix(rep(NA, 2*numberneeded),nrow=2);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA,NA);#
+		thismultinom = rmultinom(1,1,mycM0probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- mygeneratefromArea1() }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- mygeneratefromArea2() }#
+		myreturn[,i] = myx;#
+	}#
+	myreturn;#
+}#
+generateTM0rnvs = function(numberneeded) {#
+	myreturn = matrix(rep(NA, 2*numberneeded),nrow=2);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA,NA);#
+		thismultinom = rmultinom(1,1,mytM0probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- mygeneratefromArea1() }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- mygeneratefromArea2() }#
+		myreturn[,i] = myx;#
+	}#
+	myreturn;#
+}#
+for (thismc in 1:MCRUNS)  {#
+    mytrt1ctrl0 = rbinom(myn,1,0.5);  # indicates randomization to trt/ctrl#
+    myM1is1M0is0 = rbinom(myn,1,0.5); # the conditional probabilities of M1 and M0 are 0.5 for both trt and control#
+#
+    NumberOfCM1 = length(intersect(which(mytrt1ctrl0==0),which(myM1is1M0is0==1)))#
+    NumberOfTM1 = length(intersect(which(mytrt1ctrl0==1),which(myM1is1M0is0==1)))#
+    NumberOfCM0 = length(intersect(which(mytrt1ctrl0==0),which(myM1is1M0is0==0)))#
+    NumberOfTM0 = length(intersect(which(mytrt1ctrl0==1),which(myM1is1M0is0==0)))#
+#
+    myxcM1s = generateCM1rnvs(NumberOfCM1)#
+    myxtM1s = generateTM1rnvs(NumberOfTM1)#
+    myxcM0s = generateCM0rnvs(NumberOfCM0)#
+    myxtM0s = generateTM0rnvs(NumberOfTM0)#
+#
+	apply(myxcM1s,1,mean)#
+	apply(myxtM1s,1,mean)#
+	apply(myxcM0s,1,mean)#
+	apply(myxtM0s,1,mean)#
+	myxcs = cbind(myxcM0s,myxcM1s);#
+	myxts = cbind(myxtM0s,myxtM1s);#
+	myxmarginal = cbind(myxcs,myxts)#
+#
+	mycMresp = c(rep(0,NumberOfCM0),rep(1,NumberOfCM1)) #
+	mytMresp = c(rep(0,NumberOfTM0),rep(1,NumberOfTM1)) #
+	# DENSITY RATIO ESTIMATION#
+#
+	install.packages("densratio")#
+	library(densratio)#
+	densratio_obj1 = densratio(t(cbind(myxcM1s,myxcM1s,myxcM1s,myxcM1s)),t(myxmarginal),method=thismethod)#
+	densratio_obj3 = densratio(t(cbind(myxtM1s,myxtM1s,myxtM1s,myxtM1s)),t(myxmarginal),method=thismethod)#
+#
+	new_x = t(matrix(runif(2000),nrow=2));#
+#
+	w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+	w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+    # library(rgl)#
+    # plot3d(new_x[,1],new_x[,2],w_hat1)#
+	densratio_obj1#
+#
+	densratio_obj3#
+	hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+	hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+	hat_pi_c#
+	hat_pi_t#
+	hat_gsubc = w_hat1 * hat_pi_c;#
+	hat_gsubt = w_hat3 * hat_pi_t;#
+	# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+	theta0vec = rep(NA,length(w_hat1));#
+	theta1vec = rep(NA,length(w_hat1));#
+#
+	for (i in 1:length(w_hat1)) {#
+		thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+		theta0vec[i] = thismax - hat_gsubc[i];#
+		theta1vec[i] = thismax - hat_gsubt[i];#
+	}#
+#
+	DRapproachTheta0 = mean(theta0vec)#
+	seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+	DRapproachTheta1 = mean(theta1vec)#
+	seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+	DRapproachTheta0#
+	seDRapproachTheta0#
+#
+	DRapproachTheta1#
+	seDRapproachTheta1#
+	# ESTIMATE THETA0 AND THETA1 WITH LOGISTIC REGRESSION + JANES TREATMENTSELECTION PACKAGE#
+#
+	myx1cs = myxcs[1,];#
+	myx2cs = myxcs[2,];#
+	myx1ts = myxts[1,];#
+	myx2ts = myxts[2,];#
+	myx1All = c(myx1cs,myx1ts)#
+	myx2All = c(myx2cs,myx2ts)#
+	myresp = c(mycMresp,mytMresp)#
+	mytrtAll = c(rep(0,length(mycMresp)),rep(1,length(mytMresp)));#
+	mylogreg = glm(myresp ~ myx1All + myx2All + mytrtAll + #
+		myx1All:mytrtAll + myx2All:mytrtAll, family=binomial(link='logit'))#
+#
+    beta0c = coef(mylogreg)[1]#
+    beta0t = coef(mylogreg)[2]#
+	beta3 = coef(mylogreg)[5]#
+	beta4 = coef(mylogreg)[6]#
+	mydim1vec = beta3/sqrt(beta3^2+beta4^2);#
+	mydim2vec = beta4/sqrt(beta3^2+beta4^2);#
+    mynewxcM1s = as.vector(c(mydim1vec,mydim2vec) %*% myxcM1s) #
+    mynewxtM1s = as.vector(c(mydim1vec,mydim2vec) %*% myxtM1s)#
+    mynewxcM0s = as.vector(c(mydim1vec,mydim2vec) %*% myxcM0s)#
+    mynewxtM0s = as.vector(c(mydim1vec,mydim2vec) %*% myxtM0s)#
+    # boxplot(mynewxcM1s,mynewxtM1s,mynewxcM0s,mynewxtM0s)#
+	library(TreatmentSelection)#
+#
+	myoutcomes = c(rep(1,length(mynewxcM1s)),rep(0,length(mynewxcM0s)),rep(1,length(mynewxtM1s)),rep(0,length(mynewxtM0s)));#
+	mymarker = c(mynewxcM1s,mynewxcM0s,mynewxtM1s,mynewxtM0s);#
+	mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	mytrtsel#
+#
+	tmp#
+#
+	JanesTheta1 = tmp$estimates$Theta.emp#
+#
+	JanesTheta1#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	JanesTheta0 = tmp$estimates$Theta.emp#
+	JanesTheta0#
+#
+	DRtheta0s[thismc] = DRapproachTheta0;#
+	DRtheta1s[thismc] = DRapproachTheta1;#
+	HJtheta0s[thismc] = JanesTheta0; #
+	HJtheta1s[thismc] = JanesTheta1;#
+}#
+#
+write.table(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),file="simStepshapeAreamyn800MCRUNS100.txt")#
+#
+cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s)
+q()
+# SIMULATE DATA FROM THE MODEL#
+#
+thismethod = "uLSIF"#
+myn = 1000;#
+MCRUNS = 30;#
+dimlist = 11:20;#
+#
+for (mydim in dimlist) {#
+#
+myregion = function(x) {#
+	myreturn = -1;#
+	xsum = sum(x);#
+	if (xsum < (mydim/2)) { myreturn = 1; }#
+	else { myreturn = 2; }#
+}#
+#
+myalphasubcM1s = c(0.2,1.8)#
+myalphasubcM0s = 2-myalphasubcM1s;#
+#
+myalphasubtM1s = c(1.8,0.2)#
+myalphasubtM0s = 2-myalphasubtM1s;#
+#
+mybaseareas = c(0.5,0.5)#
+#
+mycM1probs = myalphasubcM1s*mybaseareas;#
+mycM0probs = myalphasubcM0s*mybaseareas;#
+mytM1probs = myalphasubtM1s*mybaseareas;#
+mytM0probs = myalphasubtM0s*mybaseareas;#
+#
+sum(mycM1probs);#
+sum(mycM0probs);#
+sum(mytM1probs)#
+sum(mytM0probs)#
+#
+mycM1probs;#
+mycM0probs;#
+mytM1probs#
+mytM0probs#
+#
+myxcM1s = rep(NA,myn/4)#
+myxtM1s = rep(NA,myn/4)#
+myxcM0s = rep(NA,myn/4)#
+myxtM0s = rep(NA,myn/4)#
+#
+DRtheta0s = rep(NA,MCRUNS)#
+DRtheta1s = rep(NA,MCRUNS)#
+HJtheta0s = rep(NA,MCRUNS)#
+HJtheta1s = rep(NA,MCRUNS)#
+mygeneratefromArea1 = function() {#
+	xtry = runif(mydim);#
+	while (sum(xtry) > (mydim/2)) { xtry = runif(mydim)  }#
+	return(xtry);#
+}#
+mygeneratefromArea2 = function() {#
+	xtry = runif(mydim);#
+	while (sum(xtry) < (mydim/2)) { xtry = runif(mydim)  }#
+	return(xtry);#
+}#
+# RETURN A mydim BY N MATRIX OF BIOMARKER VALUES#
+generateCM1rnvs = function(numberneeded) {#
+	myreturn = matrix(rep(NA, mydim*numberneeded),nrow=mydim);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA,NA);#
+		thismultinom = rmultinom(1,1,mycM1probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- mygeneratefromArea1() }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- mygeneratefromArea2() }#
+		myreturn[,i] = myx;#
+	}#
+	myreturn;#
+}#
+#
+generateTM1rnvs = function(numberneeded) {#
+	myreturn = matrix(rep(NA, mydim*numberneeded),nrow=mydim);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA,NA);#
+		thismultinom = rmultinom(1,1,mytM1probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- mygeneratefromArea1() }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- mygeneratefromArea2() }#
+		myreturn[,i] = myx;#
+	}#
+	myreturn;#
+}#
+#
+generateCM0rnvs = function(numberneeded) {#
+	myreturn = matrix(rep(NA, mydim*numberneeded),nrow=mydim);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA,NA);#
+		thismultinom = rmultinom(1,1,mycM0probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- mygeneratefromArea1() }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- mygeneratefromArea2() }#
+		myreturn[,i] = myx;#
+	}#
+	myreturn;#
+}#
+generateTM0rnvs = function(numberneeded) {#
+	myreturn = matrix(rep(NA, mydim*numberneeded),nrow=mydim);#
+#
+	for (i in 1:numberneeded) {#
+		myx = c(NA,NA);#
+		thismultinom = rmultinom(1,1,mytM0probs);#
+#
+		if (as.vector(thismultinom)[1] == 1 ) { myx <- mygeneratefromArea1() }#
+		if (as.vector(thismultinom)[2] == 1 ) { myx <- mygeneratefromArea2() }#
+		myreturn[,i] = myx;#
+	}#
+	myreturn;#
+}#
+for (thismc in 1:MCRUNS)  {#
+    mytrt1ctrl0 = rbinom(myn,1,0.5);  # indicates randomization to trt/ctrl#
+    myM1is1M0is0 = rbinom(myn,1,0.5); # the conditional probabilities of M1 and M0 are 0.5 for both trt and control#
+#
+    NumberOfCM1 = length(intersect(which(mytrt1ctrl0==0),which(myM1is1M0is0==1)))#
+    NumberOfTM1 = length(intersect(which(mytrt1ctrl0==1),which(myM1is1M0is0==1)))#
+    NumberOfCM0 = length(intersect(which(mytrt1ctrl0==0),which(myM1is1M0is0==0)))#
+    NumberOfTM0 = length(intersect(which(mytrt1ctrl0==1),which(myM1is1M0is0==0)))#
+#
+    myxcM1s = generateCM1rnvs(NumberOfCM1)#
+    myxtM1s = generateTM1rnvs(NumberOfTM1)#
+    myxcM0s = generateCM0rnvs(NumberOfCM0)#
+    myxtM0s = generateTM0rnvs(NumberOfTM0)#
+#
+	apply(myxcM1s,1,mean)#
+	apply(myxtM1s,1,mean)#
+	apply(myxcM0s,1,mean)#
+	apply(myxtM0s,1,mean)#
+	myxcs = cbind(myxcM0s,myxcM1s);#
+	myxts = cbind(myxtM0s,myxtM1s);#
+	myxmarginal = cbind(myxcs,myxts)#
+#
+	mycMresp = c(rep(0,NumberOfCM0),rep(1,NumberOfCM1)) #
+	mytMresp = c(rep(0,NumberOfTM0),rep(1,NumberOfTM1)) #
+	# DENSITY RATIO ESTIMATION#
+#
+	# install.packages("densratio")#
+	library(densratio)#
+	densratio_obj1 = densratio(t(cbind(myxcM1s,myxcM1s,myxcM1s,myxcM1s)),t(myxmarginal),method=thismethod)#
+	densratio_obj3 = densratio(t(cbind(myxtM1s,myxtM1s,myxtM1s,myxtM1s)),t(myxmarginal),method=thismethod)#
+#
+	new_x = t(matrix(runif(1000*mydim),nrow=mydim));#
+#
+	w_hat1 = densratio_obj1$compute_density_ratio(new_x);#
+	w_hat3 = densratio_obj3$compute_density_ratio(new_x);#
+    # library(rgl)#
+    # plot3d(new_x[,1],new_x[,2],w_hat1)#
+    plot(new_x[,1],w_hat1)#
+#
+	densratio_obj1#
+#
+	densratio_obj3#
+	hat_pi_c = length(myxcM1s)/(length(myxcM1s)+length(myxcM0s))#
+	hat_pi_t = length(myxtM1s)/(length(myxtM1s)+length(myxtM0s))#
+#
+	hat_pi_c#
+	hat_pi_t#
+	hat_gsubc = w_hat1 * hat_pi_c;#
+	hat_gsubt = w_hat3 * hat_pi_t;#
+	# ESTIMATE THETA0 AND THETA1 with DR approach#
+#
+	theta0vec = rep(NA,length(w_hat1));#
+	theta1vec = rep(NA,length(w_hat1));#
+#
+	for (i in 1:length(w_hat1)) {#
+		thismax = max(hat_gsubc[i],hat_gsubt[i]);#
+		theta0vec[i] = thismax - hat_gsubc[i];#
+		theta1vec[i] = thismax - hat_gsubt[i];#
+	}#
+#
+	DRapproachTheta0 = mean(theta0vec)#
+	seDRapproachTheta0 = sqrt(var(theta0vec)/length(theta0vec))#
+#
+	DRapproachTheta1 = mean(theta1vec)#
+	seDRapproachTheta1 = sqrt(var(theta1vec)/length(theta1vec))#
+#
+	DRapproachTheta0#
+	seDRapproachTheta0#
+#
+	DRapproachTheta1#
+	seDRapproachTheta1#
+	# ESTIMATE THETA0 AND THETA1 WITH LOGISTIC REGRESSION + JANES TREATMENTSELECTION PACKAGE#
+#
+	myxAll = cbind(myxcs,myxts)#
+	myresp = c(mycMresp,mytMresp)#
+	mytrtAll = c(rep(0,length(mycMresp)),rep(1,length(mytMresp)));#
+	mylogreg = glm(myresp ~ t(myxAll) + mytrtAll + t(myxAll):mytrtAll, family=binomial(link='logit'))#
+    firstindex = 1 + mydim + 1 + 1;#
+    lastindex = firstindex + (mydim - 1);#
+    betas = as.numeric(coef(mylogreg)[firstindex:lastindex]);#
+    betalength = sqrt(sum(betas^2));#
+    mydir = betas/betalength;#
+    mynewxcM1s = as.vector(mydir %*% myxcM1s) #
+    mynewxtM1s = as.vector(mydir %*% myxtM1s)#
+    mynewxcM0s = as.vector(mydir %*% myxcM0s)#
+    mynewxtM0s = as.vector(mydir %*% myxtM0s)#
+    boxplot(mynewxcM1s,mynewxtM1s,mynewxcM0s,mynewxtM0s)#
+	library(TreatmentSelection)#
+#
+	myoutcomes = c(rep(1,length(mynewxcM1s)),rep(0,length(mynewxcM0s)),rep(1,length(mynewxtM1s)),rep(0,length(mynewxtM0s)));#
+	mymarker = c(mynewxcM1s,mynewxcM0s,mynewxtM1s,mynewxtM0s);#
+	mytreatment = c(rep(0,myn/2),rep(1,myn/2))#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt all")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	mytrtsel#
+#
+	tmp#
+#
+	JanesTheta1 = tmp$estimates$Theta.emp#
+#
+	JanesTheta1#
+#
+	datafraforjanes = data.frame(event=myoutcomes,trt=mytreatment,Y1=mymarker);#
+	mytrtsel = trtsel(event ~ Y1*trt,treatment.name="trt",data=datafraforjanes,#
+	                      study.design="RCT",family=binomial("logit"),default.trt="trt none")#
+	tmp = evaluate(mytrtsel,bootstraps=1000);#
+#
+	JanesTheta0 = tmp$estimates$Theta.emp#
+	JanesTheta0#
+#
+	DRtheta0s[thismc] = DRapproachTheta0;#
+	DRtheta1s[thismc] = DRapproachTheta1;#
+	HJtheta0s[thismc] = JanesTheta0; #
+	HJtheta1s[thismc] = JanesTheta1;#
+}#
+myfilename <- paste("SimTriangleDim",as.character(mydim),"n",as.character(myn),".txt",sep="")#
+#
+write.table(cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s),file=myfilename)#
+#
+cbind(DRtheta0s,DRtheta1s,HJtheta0s,HJtheta1s)#
+#
+}
+q()
+getwd()
+q()
+scen1 = matrix(byrow=TRUE,ncol=3,#
+	data= c( 100, 0.26487565, 0.0010755962,#
+ 200, 0.18648707, 0.0006833726,#
+ 300, 0.15030049, 0.0005005770,#
+ 400, 0.13116346, 0.0004373328,#
+ 500, 0.11669428, 0.0003762217,#
+ 600, 0.10640306, 0.0003289433,#
+ 700, 0.09861632, 0.0002844180,#
+ 800, 0.09220055, 0.0002560859,#
+ 900, 0.08721363, 0.0002576468,#
+1000, 0.08251211, 0.0002337173) )#
+scen1;#
+scen2 = matrix(byrow=TRUE,ncol=3,#
+	data= c(#
+  100, 0.26205064, 0.0015597552,#
+  200, 0.18517943, 0.0009117799,#
+  300, 0.14987508, 0.0007048327,#
+  400, 0.13112041, 0.0005695762,#
+  500, 0.11633496, 0.0004926731,#
+  600, 0.10540699, 0.0004080055,#
+  700, 0.09826529, 0.0003866161,#
+  800, 0.09170087, 0.0003526923,#
+  900, 0.08653679, 0.0003221365,#
+ 1000, 0.08171745, 0.0002982492))#
+ scen2		#
+plot(c(scen1[,1],scen2[,1]),#
+	 c(1/(scen1[,2])^2,1/(scen2[,2])^2),#
+	 type="n",#
+	 xlab = "Sample Size",#
+	 ylab = "Inverse squared width")#
+points(scen1[,1],1/(scen1[,2])^2,pch=1)#
+points(scen2[,1],1/(scen2[,2])^2,pch=2)#
+#
+lines(scen1[,1],1/(scen1[,2])^2,lty=1)#
+lines(scen2[,1],1/(scen2[,2])^2,lty=2)#
+#
+legend("topleft",legend=c("Scenario 1","Scenario 2"),#
+	pch=1:2,lty=1:2)
+scen1 <- matrix(byrow=TRUE,ncol=3,#
+  data = c(#
+ 100, 0.24730865, 0.0008056438,#
+ 200, 0.17374501, 0.0005185624,#
+ 300, 0.14101507, 0.0004215200,#
+ 400, 0.12223849, 0.0003499695,#
+ 500, 0.10966902, 0.0002878763,#
+ 600, 0.09956488, 0.0002618449,#
+ 700, 0.09249577, 0.0002493120,#
+ 800, 0.08597724, 0.0002338844,#
+ 900, 0.08100783, 0.0002174257,#
+1000, 0.07739681, 0.0002019208#
+))#
+scen2 <- matrix(byrow=TRUE,ncol=3,#
+  data = c(#
+ 100, 0.26161213, 0.0015971040,#
+ 200, 0.18555607, 0.0009214230,#
+ 300, 0.15237462, 0.0007033250,#
+ 400, 0.13008093, 0.0005728234,#
+ 500, 0.11626316, 0.0004740571,#
+ 600, 0.10646911, 0.0004480495,#
+ 700, 0.09804780, 0.0003906748,#
+ 800, 0.09141152, 0.0003415667,#
+ 900, 0.08631422, 0.0003269828,#
+1000, 0.08210481, 0.0002997973))#
+scen3 <- matrix(byrow=TRUE,ncol=3,#
+  data = c(#
+ 100, 0.28769917, 0.0009959614,#
+ 200, 0.20245427, 0.0006205713,#
+ 300, 0.16600735, 0.0004796595,#
+ 400, 0.14259664, 0.0003887918,#
+ 500, 0.12768219, 0.0003488270,#
+ 600, 0.11651547, 0.0003070444,#
+ 700, 0.10790966, 0.0002845653,#
+ 800, 0.10041263, 0.0002660583,#
+ 900, 0.09479731, 0.0002500243,#
+1000, 0.09022797, 0.0002425916))#
+#
+setwd("/home/kevin/Desktop/Git/mcshane2/RevSpr18/plots")#
+png("FinalNEvsInvSqWid.png")#
+plot(c(scen1[,1],scen2[,1],scen3[,1]),#
+	 c(1/(scen1[,2])^2,1/(scen2[,2])^2,#
+	 	1/(scen3[,2])^2),#
+	 type="n",#
+	 xlab = "Number of Events",#
+	 ylab = "Inverse squared width",#
+	 cex.lab=1.5)#
+points(scen1[,1],1/(scen1[,2])^2,pch=1)#
+points(scen2[,1],1/(scen2[,2])^2,pch=2)#
+points(scen3[,1],1/(scen3[,2])^2,pch=3)#
+#
+lines(scen1[,1],1/(scen1[,2])^2,lty=1)#
+lines(scen2[,1],1/(scen2[,2])^2,lty=2)#
+lines(scen3[,1],1/(scen3[,2])^2,lty=3)#
+#
+legend("topleft",legend=#
+	c("k1=0.10, k2=0.90, k3=0.90, k4=0.10",#
+	  "k1=0.25, k2=0.75, k3=0.50, k4=0.50",#
+	  "k1=0.10, k2=0.55, k3=0.90, k4=0.45"),#
+	pch=1:3,lty=1:3,cex=1.5)#
+dev.off();
+getwd()
+plot(c(scen1[,1],scen2[,1],scen3[,1]),#
+	 c(1/(scen1[,2])^2,1/(scen2[,2])^2,#
+	 	1/(scen3[,2])^2),#
+	 type="n",#
+	 xlab = "Number of Events",#
+	 ylab = "Inverse squared width",#
+	 cex.lab=1.5)#
+points(scen1[,1],1/(scen1[,2])^2,pch=1)#
+points(scen2[,1],1/(scen2[,2])^2,pch=2)#
+points(scen3[,1],1/(scen3[,2])^2,pch=3)#
+#
+lines(scen1[,1],1/(scen1[,2])^2,lty=1)#
+lines(scen2[,1],1/(scen2[,2])^2,lty=2)#
+lines(scen3[,1],1/(scen3[,2])^2,lty=3)#
+#
+legend("topleft",legend=#
+	c("k1=0.10, k2=0.90, k3=0.90, k4=0.10",#
+	  "k1=0.25, k2=0.75, k3=0.50, k4=0.50",#
+	  "k1=0.10, k2=0.55, k3=0.90, k4=0.45"),#
+	pch=1:3,lty=1:3,cex=1.5)
+plot(c(scen1[,1],scen2[,1],scen3[,1]),#
+	 c(1/(scen1[,2])^2,1/(scen2[,2])^2,#
+	 	1/(scen3[,2])^2),#
+	 type="n",#
+	 xlab = "Number of Events",#
+	 ylab = "Inverse squared width",#
+	 cex.lab=1.5,cex.axes=1.5)
+plot(c(scen1[,1],scen2[,1],scen3[,1]),#
+	 c(1/(scen1[,2])^2,1/(scen2[,2])^2,#
+	 	1/(scen3[,2])^2),#
+	 type="n",#
+	 xlab = "Number of Events",#
+	 ylab = "Inverse squared width",#
+	 cex.lab=1.5,cex.axis=1.5)
+plot(c(scen1[,1],scen2[,1],scen3[,1]),#
+	 c(1/(scen1[,2])^2,1/(scen2[,2])^2,#
+	 	1/(scen3[,2])^2),#
+	 type="n",#
+	 xlab = "Number of Events",#
+	 ylab = "Inverse squared width",#
+	 cex.lab=1.5,cex.axis=1.5)#
+points(scen1[,1],1/(scen1[,2])^2,pch=1)#
+points(scen2[,1],1/(scen2[,2])^2,pch=2)#
+points(scen3[,1],1/(scen3[,2])^2,pch=3)#
+#
+lines(scen1[,1],1/(scen1[,2])^2,lty=1)#
+lines(scen2[,1],1/(scen2[,2])^2,lty=2)#
+lines(scen3[,1],1/(scen3[,2])^2,lty=3)#
+#
+legend("topleft",legend=#
+	c("k1=0.10, k2=0.90, k3=0.90, k4=0.10",#
+	  "k1=0.25, k2=0.75, k3=0.50, k4=0.50",#
+	  "k1=0.10, k2=0.55, k3=0.90, k4=0.45"),#
+	pch=1:3,lty=1:3,cex=1.5)
+# setwd("Set this to the directory that contains the downloaded file")#
+source(file="SS4TrtSelSurv.R")#
+#
+# Parameter settings#
+normalmean = 0.5;#
+normalsd = sqrt(1/12)#
+#
+#  Parameter for the number of MC runs for each estimation (fixed)#
+# The k-values for input#
+ExpPropOfDeaths = 0.5;#
+NumberOfBootstraps = 200;#
+mydesign = "strategy"#
+k1 = 0.25; k2 = 0.75;#
+k3 = 0.75; k4 = 0.25;#
+t0=5;#
+#
+start1 = Sys.time()#
+temp1 <- Calculate.sample.size(targetwidth=0.10,k1,k2,k3,k4,t0,#
+                        mydesign=mydesign,ExpPropOfDeaths=ExpPropOfDeaths,#
+                        NumberOfBootstraps=NumberOfBootstraps)#
+end1 = Sys.time()#
+#
+print(temp1);#
+#
+plot(as.numeric(temp1[[3]]),as.numeric(temp1[[4]]),xlab="Sample Size", ylab="Inverse squared Width")
+library(doParallel)
+install.packages("doParallel")
+library(doParallel)
+# setwd("Set this to the directory that contains the downloaded file")#
+source(file="SS4TrtSelSurv.R")#
+#
+# Parameter settings#
+normalmean = 0.5;#
+normalsd = sqrt(1/12)#
+#
+#  Parameter for the number of MC runs for each estimation (fixed)#
+# The k-values for input#
+ExpPropOfDeaths = 0.5;#
+NumberOfBootstraps = 200;#
+mydesign = "strategy"#
+k1 = 0.25; k2 = 0.75;#
+k3 = 0.75; k4 = 0.25;#
+t0=5;#
+#
+start1 = Sys.time()#
+temp1 <- Calculate.sample.size(targetwidth=0.10,k1,k2,k3,k4,t0,#
+                        mydesign=mydesign,ExpPropOfDeaths=ExpPropOfDeaths,#
+                        NumberOfBootstraps=NumberOfBootstraps)#
+end1 = Sys.time()#
+#
+print(temp1);#
+#
+plot(as.numeric(temp1[[3]]),as.numeric(temp1[[4]]),xlab="Sample Size", ylab="Inverse squared Width")
+# setwd("Set this to the directory that contains the downloaded file")#
+source(file="SS4TrtSelSurv.R")#
+#
+# Parameter settings#
+normalmean = 0.5;#
+normalsd = sqrt(1/12)#
+#
+#  Parameter for the number of MC runs for each estimation (fixed)#
+# The k-values for input#
+ExpPropOfDeaths = 1.0;#
+NumberOfBootstraps = 200;#
+mydesign = "strategy"#
+k1 = 0.25; k2 = 0.75;#
+k3 = 0.75; k4 = 0.25;#
+t0=5;#
+#
+start1 = Sys.time()#
+temp1 <- Calculate.sample.size(targetwidth=0.10,k1,k2,k3,k4,t0,#
+                        mydesign=mydesign,ExpPropOfDeaths=ExpPropOfDeaths,#
+                        NumberOfBootstraps=NumberOfBootstraps)#
+end1 = Sys.time()#
+#
+print(temp1);#
+#
+plot(as.numeric(temp1[[3]]),as.numeric(temp1[[4]]),xlab="Sample Size", ylab="Inverse squared Width")
+# setwd("Set this to the directory that contains the downloaded file")#
+source(file="SS4TrtSelSurv.R")#
+#
+# Parameter settings#
+normalmean = 0.5;#
+normalsd = sqrt(1/12)#
+#
+#  Parameter for the number of MC runs for each estimation (fixed)#
+# The k-values for input#
+ExpPropOfDeaths = .75;#
+NumberOfBootstraps = 200;#
+mydesign = "strategy"#
+k1 = 0.25; k2 = 0.75;#
+k3 = 0.75; k4 = 0.25;#
+t0=5;#
+#
+start1 = Sys.time()#
+temp1 <- Calculate.sample.size(targetwidth=0.10,k1,k2,k3,k4,t0,#
+                        mydesign=mydesign,ExpPropOfDeaths=ExpPropOfDeaths,#
+                        NumberOfBootstraps=NumberOfBootstraps)#
+end1 = Sys.time()#
+#
+print(temp1);#
+#
+plot(as.numeric(temp1[[3]]),as.numeric(temp1[[4]]),xlab="Sample Size", ylab="Inverse squared Width")

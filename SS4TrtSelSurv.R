@@ -75,12 +75,7 @@ getlambdasbetas <- function(k1,k2,k3,k4,t0,FUN){
 
 generatedata <- function(lambda,beta1,beta2,beta3,working.n,t0,mydesign) {
   myy = normalmean + normalsd * rnorm(working.n);
-  if (mydesign == "stratified"){
-    mytrt = rbinom(working.n,1,0.5); # Assumes complete randomization
-  }
-  if (mydesign == "strategy"){
-    mytrt = rbinom(working.n,1,0.25); # Assumes complete randomization    
-  }
+  mytrt = rbinom(working.n,1,0.5); # Assumes complete randomization
   if (length(which(mytrt==0))<5) stop("Too few in the control set.");
   if (length(which(mytrt==1))<5) stop("Too few in the treatment set.");
   hazard = lambda * exp(beta1*myy+beta2*mytrt+beta3*myy*mytrt);
