@@ -72,6 +72,18 @@ getlambdasbetas <- function(k1,k2,k3,k4,t0,FUN){
   c(lambda,beta1,beta2,beta3);
 }
 
+getTrueTheta0 <- function(lambda,beta1,beta2,beta3,t0) {
+  myfun1 = function(y) {
+    exp(-lambda*t0*exp(beta2+(beta1+beta3)*y)); 
+  }
+  myfun2 = function(y) {
+    exp(-lambda*t0*exp(beta1*y));
+  }
+  myfun3 = function(y) max(myfun1(y),myfun2(y))
+  myanswer = integrate(myfun3,0,1);
+  myanswer;
+}
+
 
 generatedata <- function(lambda,beta1,beta2,beta3,working.n,t0,mydesign) {
   myy = normalmean + normalsd * rnorm(working.n);
@@ -190,6 +202,8 @@ Calculate.sample.size <- function(targetwidth,
    approx.sample.size.df = approx.sample.size.list[[1]]
    approx.sample.size = as.numeric(approx.sample.size.df$samplesize)
    print(approx.sample.size)
+   TrueTheta0 = getTrueTheta0(thislambda,thisbeta1,thisbeta2,thisbeta3,thist0);
+   print(TrueTheta0)
    return(approx.sample.size.list)
 
 #   final.sample.size.df <- sampsizefcn(targetwidth,
