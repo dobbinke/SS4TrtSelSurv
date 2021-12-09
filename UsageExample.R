@@ -11,7 +11,7 @@ normalsd = sqrt(1/12)
 #  Parameter for the number of MC runs for each estimation (fixed)
 # The k-values for input
 ExpPropOfDeaths = 1.00;
-NumberOfBootstraps = 1000;
+NumberOfBootstraps = 200;
 mydesign = "stratified"
 k1 = 0.25; k2 = 0.75;
 k3 = 0.75; k4 = 0.25;
