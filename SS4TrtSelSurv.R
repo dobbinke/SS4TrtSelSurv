@@ -84,12 +84,16 @@ getTrueTheta0 <- function(lambda,beta1,beta2,beta3,t0) {
     mylength = length(y);
     myanswer = rep(NA,mylength);
     for (i in 1:mylength) { 
-      myanswer[i]=max(myfun1(y[i]),myfun2(y[i])) 
+      mytemp1 = (myfun1(y[i])-myfun2(y[i])) * dnorm(y[i],mean=normalmean,sd=normalsd);
+      if (mytemp1 > 0) {myanswer[i] = mytemp1}
+      else { myanswer[i] = 0}
     }
     myanswer;
   }
+  mylower = -Inf; #normalmean - 3*normalsd;
+  myupper = Inf; #normalmean + 3*normalsd
 
-  myanswer = integrate(myfun3,0,1);
+  myanswer = integrate(myfun3,mylower,myupper);
   myanswer;
 }
 
@@ -219,6 +223,7 @@ Calculate.sample.size <- function(targetwidth,
    thist0 = t0;
    TrueTheta0 = getTrueTheta0(thislambda,thisbeta1,thisbeta2,thisbeta3,thist0);
    # TrueTheta0 = getTrueTheta0(thislambda,thisbeta1,thisbeta2,thisbeta3,thist0);
+   print("True Theta0 is:")
    print(TrueTheta0)
    return(approx.sample.size.list)
 
