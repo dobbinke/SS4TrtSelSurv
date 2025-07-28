@@ -1,3 +1,20 @@
+summary(myPolynomialHH5)
+summary(myPolynomialHH4)
+myPolynomialHH1 = lmer(myresp ~ HG.treatment.ind + (1|HG.cluster.factor) #
+     + HG.cluster.factor:poly(HG.time.numeric,1))#
+myPolynomialHH2 = lmer(myresp ~ HG.treatment.ind + (1|HG.cluster.factor) #
+     + HG.cluster.factor:poly(HG.time.numeric,2))#
+myPolynomialHH3 = lmer(myresp ~ HG.treatment.ind + (1|HG.cluster.factor) #
+     + HG.cluster.factor:poly(HG.time.numeric,3))#
+myPolynomialHH4 = lmer(myresp ~ HG.treatment.ind + (1|HG.cluster.factor) #
+     + HG.cluster.factor:poly(HG.time.numeric,4))#
+myPolynomialHH5 = lmer(myresp ~ HG.treatment.ind + (1|HG.cluster.factor) #
+     + HG.cluster.factor:poly(HG.time.numeric,5))#
+myPolynomialHH6 = lmer(myresp ~ HG.treatment.ind + (1|HG.cluster.factor) #
+     + HG.cluster.factor:poly(HG.time.numeric,6))#
+myPolynomialHH7 = lmer(myresp ~ HG.treatment.ind + (1|HG.cluster.factor) #
+     + HG.cluster.factor:poly(HG.time.numeric,7))#
+anova(myPolynomialHH1,myPolynomialHH2,myPolynomialHH3,myPolynomialHH4,myPolynomialHH5,myPolynomialHH6,myPolynomialHH7)
 myPolynomialHH6
 myPolynomialHH1 = lmer(myresp ~ HG.treatment.ind + (1|HG.cluster.factor) #
      + HG.cluster.factor:poly(HG.time.numeric,1),raw=FALSE)#
@@ -2946,58 +2963,12 @@ mylist2/sum(mylist2)
 mylist1[1:3]/sum(mylist1[1:3])
 mylist2[1:3]/sum(mylist2[1:3])
 # setwd("Set this to the directory that contains the downloaded file")#
-source(file="SS4TrtSelSurv.R")#
 #
-# Parameter settings#
-normalmean = 0.5;#
-normalsd = sqrt(1/12)#
+install.packages("doParallel")#
+install.packages("TreatmentSelection")#
+library(doParallel)#
+library(TreatmentSelection)#
 #
-#  Parameter for the number of MC runs for each estimation (fixed)#
-# The k-values for input#
-ExpPropOfDeaths = 1.00;#
-NumberOfBootstraps = 200;#
-mydesign = "stratified"#
-k1 = 0.25; k2 = 0.75;#
-k3 = 0.75; k4 = 0.25;#
-t0=5;#
-#
-start1 = Sys.time()#
-temp1 <- Calculate.sample.size(targetwidth=0.10,k1,k2,k3,k4,t0,#
-                        mydesign=mydesign,ExpPropOfDeaths=ExpPropOfDeaths,#
-                        NumberOfBootstraps=NumberOfBootstraps)#
-end1 = Sys.time()#
-#
-print(temp1);#
-#
-plot(as.numeric(temp1[[3]]),as.numeric(temp1[[4]]),xlab="Sample Size", ylab="Inverse squared Width")
-install.packages("doParallel")
-library(doParallel)
-# setwd("Set this to the directory that contains the downloaded file")#
-source(file="SS4TrtSelSurv.R")#
-#
-# Parameter settings#
-normalmean = 0.5;#
-normalsd = sqrt(1/12)#
-#
-#  Parameter for the number of MC runs for each estimation (fixed)#
-# The k-values for input#
-ExpPropOfDeaths = 1.00;#
-NumberOfBootstraps = 200;#
-mydesign = "stratified"#
-k1 = 0.25; k2 = 0.75;#
-k3 = 0.75; k4 = 0.25;#
-t0=5;#
-#
-start1 = Sys.time()#
-temp1 <- Calculate.sample.size(targetwidth=0.10,k1,k2,k3,k4,t0,#
-                        mydesign=mydesign,ExpPropOfDeaths=ExpPropOfDeaths,#
-                        NumberOfBootstraps=NumberOfBootstraps)#
-end1 = Sys.time()#
-#
-print(temp1);#
-#
-plot(as.numeric(temp1[[3]]),as.numeric(temp1[[4]]),xlab="Sample Size", ylab="Inverse squared Width")
-# setwd("Set this to the directory that contains the downloaded file")#
 source(file="SS4TrtSelSurv.R")#
 #
 # Parameter settings#
@@ -3053,3 +3024,4 @@ end1 = Sys.time()#
 print(temp1);#
 #
 plot(as.numeric(temp1[[3]]),as.numeric(temp1[[4]]),xlab="Sample Size", ylab="Inverse squared Width")
+q()
