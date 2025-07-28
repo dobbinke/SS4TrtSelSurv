@@ -1,6 +1,10 @@
 
 # setwd("Set this to the directory that contains the downloaded file")
 
+install.packages("doParallel")
+install.packages("TreatmentSelection")
+library(doParallel)
+library(TreatmentSelection)
 
 source(file="SS4TrtSelSurv.R")
 
